@@ -28,6 +28,7 @@ export default class Menu extends Component {
 
   render() {
     const {
+      onChange,
       checkmark,
       children,
       divider,
@@ -55,6 +56,7 @@ export default class Menu extends Component {
             hasFocus={hasFocus}
             multiple={multiple}
             onBlur={handleBlur}
+            onChange={onChange}
             onFocus={handleFocus}
             onKeyDown={onKeyDown}
             {...otherProps}

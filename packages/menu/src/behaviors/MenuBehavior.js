@@ -28,6 +28,10 @@ export default class MenuBehavior extends Component {
   }
 
   setActiveOption = activeOption => {
+    if (this.props.onChange) {
+      this.props.onChange(activeOption);
+    }
+
     this.setState({ activeOption });
   }
 
