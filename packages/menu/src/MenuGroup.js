@@ -25,7 +25,7 @@ function createOptions(children) {
 
 export default class MenuGroup extends Component {
   static propTypes = {
-    
+    onChange: PropTypes.func
   };
 
   static defaultProps = {
@@ -47,6 +47,10 @@ export default class MenuGroup extends Component {
   }
 
   setActiveOption = activeOption => {
+    if (this.props.onChange) {
+      this.props.onChange(activeOption);
+    }
+
     this.setState({ activeOption });
   }
 
