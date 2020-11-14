@@ -43,8 +43,6 @@ export default class MenuPresenter extends Component {
    * @returns {JSX.Element}
    */
   renderOption = ({ key, props }) => {
-    // const { setActiveOption } = props;
-    // console.log('renderOption');
     const {
       checkmark,
       getActiveOption,
@@ -56,51 +54,20 @@ export default class MenuPresenter extends Component {
       setActiveOption,
       setHighlightIndex
     } = this.props;
-    /* const {
-      hoveredTabIndex,
-      effectiveAlign,
-      effectiveOrientation,
-      effectiveShowTabDivider
-    } = this.state;
-    const activeTabIndex = this.getActiveTabIndex();
-
-    let showTabDivider = effectiveShowTabDivider;
-    if (index === activeTabIndex || index === activeTabIndex - 1) {
-      showTabDivider = false;
-    }
-    if (index === hoveredTabIndex || index === hoveredTabIndex - 1) {
-      showTabDivider = false;
-    }
-
-    const className = cx(
-      tabClassName,
-      createCustomClassNames(tabsClassName, "tab")
-    ); */
-
     const payload = {
       ...props,
       checkmark,
       getActiveOption,
       getHighlightIndex,
       getOptionsInfo,
-      // index,
       key,
       onBlur,
       onFocus,
       onKeyDown,
       setActiveOption,
       setHighlightIndex
-      /*,
-      key,
-      variant,
-      className,
-      showDivider: showTabDivider,
-      align: effectiveAlign,
-      orientation: effectiveOrientation,
-      active: activeTabIndex === index, */
     };
-//console.log(payload);
-// console.log(this.props);
+
     return <Option {...payload} />;
   };
 
@@ -112,29 +79,21 @@ export default class MenuPresenter extends Component {
   }
 
   componentDidMount() {
-    console.log('menu presenter componentDidMount');
     const optionsInfo = {};
     React.Children.forEach(this.props.children, (child, index) => {
-      // console.log(child.props);
       optionsInfo[index] = child.props;
-      // console.log(child.props["role"]);
     })
-    // console.log(optionIds);
     this.props.setOptionsInfo(optionsInfo);
-
-    // push all the highlightables to associative array (k/v) => count/index
-    // push the length of highlitables
   }
 
   render() {
     const {
       children,
+      divider,
+      stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
-
     const {
-      className,
-      // setActiveOption
       id,
       onBlur,
       onFocus,
@@ -145,9 +104,9 @@ export default class MenuPresenter extends Component {
 
     return (
       <ThemeContext.Consumer>
-        {({ resolvedRoles, metadata }) => {
+        {({ resolvedRoles }) => {
 
-          const styles = stylesheet(this.props, resolvedRoles);
+          const styles = stylesheet({ divider, stylesheet: customStylesheet }, resolvedRoles);
 
           return (
             <ul

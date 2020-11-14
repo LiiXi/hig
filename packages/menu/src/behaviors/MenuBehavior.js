@@ -79,7 +79,7 @@ export default class MenuBehavior extends Component {
     } = props;
     const options = this.state.optionInfo;
     const highlightableIndexes = [];
-    
+
     if (onKeyDown) {
       onKeyDown(event);
     }
@@ -146,7 +146,7 @@ export default class MenuBehavior extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     /* const {
       getActiveOption,
       getHighlightIndex,

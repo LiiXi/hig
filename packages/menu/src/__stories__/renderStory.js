@@ -12,7 +12,7 @@ export default function renderStory(props, component) {
     <KnobbedThemeProvider>
       <div style={{ width: "300px" }}>
         <Surface borderRadius="m" shadow="low">
-          <HIGComponent {...otherProps} onKeyDown={event => {console.log(event.target)}}>{children}</HIGComponent>
+          <HIGComponent {...otherProps} divider onKeyDown={event => {console.log(event.target)}}>{children}</HIGComponent>
         </Surface>
       </div>
     </KnobbedThemeProvider>

@@ -10,6 +10,7 @@ function getRulesByPresentation(themeData) {
 export default function stylesheet(props, themeData) {
   const {
     disabled,
+    divider,
     highlighted,
     isPressed,
     role,
@@ -18,6 +19,7 @@ export default function stylesheet(props, themeData) {
   } = props;
   const styles = {
     menu: {
+      borderBottom: divider ? `1px solid red` : {},
       boxSizing: `border-box`,
       cursor: `pointer`,
       fontFamily: themeData[`basics.fontFamilies.main`],

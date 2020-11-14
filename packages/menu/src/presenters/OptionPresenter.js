@@ -41,7 +41,6 @@ export default class OptionPresenter extends Component {
     const {
       className,
       id,
-      index,
       onBlur,
       onClick,
       onFocus,
@@ -52,18 +51,20 @@ export default class OptionPresenter extends Component {
       role
     } = otherProps;
 
-    // const defaultId = `menu-item-${index}`;
     const ariaPayload = role === `option` ? { "aria-selected": selected } : {};
 
     return (
       <ThemeContext.Consumer>
         {({ resolvedRoles, metadata }) => {
-          const styles = stylesheet(this.props, resolvedRoles);
+          const styles = stylesheet({
+            disabled,
+            highlighted,
+            isPressed,
+            role,
+            selected,
+            stylesheet: customStylesheet
+          }, resolvedRoles);
           const Checkmark = metadata.densityId === `medium-density` ? CheckmarkSUI : CheckmarkXsUI;
-          /* const labelClassName = createCustomClassNames(
-            className,
-            "section-label"
-          ); */
 
           return (
             <li
@@ -81,7 +82,6 @@ export default class OptionPresenter extends Component {
               onMouseLeave={onMouseLeave}
               onMouseUp={onMouseUp}
               selected={selected}
-              
             >
               {checkmark && role !== `presentation` ? <div className={css(styles.checkmarkWrapper)}><Checkmark /></div> : null }
               {asset ? <div className={css(styles.assetWrapper)}>{this.props.asset}</div> : null }

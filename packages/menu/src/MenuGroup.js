@@ -14,8 +14,7 @@ import stylesheet from "./stylesheet";
 function createOptions(children) {
   return Children.toArray(children).reduce((result, child, index) => {
     const { type, key, props = {index} } = child;
-console.log('menu group create options');
-//  console.log(props.children);
+
     if (type === Menu) {
       result.push({ key, props });
     }
@@ -96,10 +95,12 @@ export default class MenuGroup extends Component {
     } = props;
     const options = this.state.optionInfo;
     const highlightableIndexes = [];
-    
+
     if (onKeyDown) {
       onKeyDown(event);
     }
+
+    console.log(event.target.children);
 
     // Set up the what can be highlighted
     for (const index in options) {
@@ -211,7 +212,7 @@ export default class MenuGroup extends Component {
   }
 
   componentDidMount() {
-    console.log('menugroup componentDidMount');
+    // console.log('menugroup componentDidMount');
     // new name needed
     const optionsInfo = {};
     const mergedOptions = [];
@@ -232,7 +233,7 @@ export default class MenuGroup extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const {
       children,
       ...otherProps
@@ -249,12 +250,12 @@ export default class MenuGroup extends Component {
           return (
             <div
               // className={css(styles.menu)}
+              {...otherProps}
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}
               onKeyDown={this.handleKeyDown}
               role="listbox" // conditional or required
               tabIndex="0" // conditional w/ MenuGroup
-              {...otherProps}
             >
               {this.renderOptions()}
             </div>

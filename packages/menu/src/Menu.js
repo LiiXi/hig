@@ -9,6 +9,10 @@ import MenuPresenter from "./presenters/MenuPresenter";
 export default class Menu extends Component {
   static propTypes = {
     /**
+     * Shows a divider at the bottom of the menu
+     */
+    divider: PropTypes.bool,
+    /**
      * Enables multiple selection
      */
     multiple: PropTypes.bool,
@@ -23,24 +27,18 @@ export default class Menu extends Component {
   };
 
   render() {
-// console.log(this.props);
     const {
       checkmark,
       children,
+      divider,
       multiple,
-      stylesheet: customStylesheet,
+      stylesheet,
       ...otherProps
     } = this.props;
     const {
-      // className,
       onBlur,
       onFocus,
       onKeyDown
-      // onKeyUp,
-      // onMouseDown,
-      // onMouseEnter,
-      // onMouseLeave,
-      // onMouseUp
     } = otherProps;
 
     return (
@@ -74,6 +72,7 @@ export default class Menu extends Component {
             }) => (
               <MenuPresenter
                 checkmark={checkmark}
+                divider={divider}
                 getActiveOption={getActiveOption}
                 getHighlightIndex={getHighlightIndex}
                 getOptionsInfo={getOptionsInfo}
@@ -83,6 +82,7 @@ export default class Menu extends Component {
                 setActiveOption={setActiveOption}
                 setHighlightIndex={setHighlightIndex}
                 setOptionsInfo={setOptionsInfo}
+                stylesheet={stylesheet}
                 {...otherProps}
               >
                 {children}
