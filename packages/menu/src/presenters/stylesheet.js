@@ -58,6 +58,14 @@ export default function stylesheet(props, themeData) {
       justifyContent: `center`,
       marginRight: themeData[`density.spacings.extraSmall`],
       fontWeight: 400
+    },
+    optionContentWrapper: {
+      width: `100%`
+    },
+    shortcutWrapper: {
+      color: `red`,
+      float: `right`,
+      fontWeight: themeData[`basics.fontWeights.regular`]
     }
   };
 // console.log(props);

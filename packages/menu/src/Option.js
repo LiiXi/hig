@@ -31,6 +31,7 @@ export default class Option extends Component {
       asset,
       children,
       disabled,
+      shortcut,
       stylesheet,
       ...otherProps
     } = this.props;
@@ -82,6 +83,7 @@ export default class Option extends Component {
                 onMouseUp={handleMouseUp}
                 role={role}
                 selected={isActive()}
+                shortcut={shortcut}
                 stylesheet={stylesheet}
               >
                 {children}

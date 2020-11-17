@@ -35,6 +35,7 @@ export default class OptionPresenter extends Component {
       checkmark,
       children,
       selected,
+      shortcut,
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
@@ -62,6 +63,7 @@ export default class OptionPresenter extends Component {
             isPressed,
             role,
             selected,
+            shortcut,
             stylesheet: customStylesheet
           }, resolvedRoles);
           const Checkmark = metadata.densityId === `medium-density` ? CheckmarkSUI : CheckmarkXsUI;
@@ -84,8 +86,11 @@ export default class OptionPresenter extends Component {
               selected={selected}
             >
               {checkmark && role !== `presentation` ? <div className={css(styles.checkmarkWrapper)}><Checkmark /></div> : null }
-              {asset ? <div className={css(styles.assetWrapper)}>{this.props.asset}</div> : null }
-              {children}
+              {asset ? <div className={css(styles.assetWrapper)}>{asset}</div> : null }
+              <div className={css(styles.optionContentWrapper)}>
+                {children}
+                { shortcut ? <span className={css(styles.shortcutWrapper)}>{shortcut}</span> : null }
+              </div>
             </li>
           );
         }}
