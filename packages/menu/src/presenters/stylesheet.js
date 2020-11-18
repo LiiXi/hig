@@ -1,7 +1,7 @@
 function getRulesByPresentation(themeData) {
   return {
-    fontSize: `12px`,
-    color: `#3c3c3c`,
+    fontSize: themeData[`menu.header.fontSize`],
+    color: themeData[`menu.header.fontColor`],
     opacity: 0.5,
     textTransform: `uppercase`
   }
@@ -22,8 +22,8 @@ export default function stylesheet(props, themeData) {
       borderBottom: divider ? `1px solid red` : {},
       boxSizing: `border-box`,
       cursor: `pointer`,
-      fontFamily: themeData[`basics.fontFamilies.main`],
-      fontSize: themeData[`density.fontSizes.medium`],
+      fontFamily: themeData[`menu.fontFamily`],
+      // fontSize: themeData[`density.fontSizes.medium`],
       listStyle: `none`,
       margin: 0,
       outline: 0,
@@ -32,10 +32,11 @@ export default function stylesheet(props, themeData) {
     },
     menuOption: {
       display: `flex`,
+      fontSize: themeData[`menu.label.fontSize`],
       alignItems: `center`,
       minHeight: themeData[`menu.item.minHeight`],
       padding: `${themeData["menu.item.paddingVertical"]} ${themeData["menu.item.paddingHorizontal"]}`,
-      ...(selected ? { fontWeight: themeData[`basics.fontWeights.bold`] } : { fontWeight: themeData[`basics.fontWeights.regular`] }),
+      ...(selected ? { fontWeight: themeData[`menu.label.selected.fontWeight`] } : { fontWeight: themeData[`menu.label.default.fontWeight`] }),
       ...(highlighted ? { backgroundColor: themeData[`menu.item.hover.backgroundColor`] } : {}),
       ...(isPressed && (!disabled && role !== `presentation`) ? { backgroundColor: themeData[`menu.item.pressed.backgroundColor`] } : {}),
       ...(disabled ? { opacity: themeData[`colorScheme.opacity.disabled`] } : {}),
@@ -50,22 +51,24 @@ export default function stylesheet(props, themeData) {
       marginRight: themeData[`menu.item.paddingHorizontal`],
       "& > svg > *": {
         opacity: 0,
-        ...(selected ? { fill: themeData[`colorScheme.indicator.on`], opacity: 1 } : {})
+        ...(selected ? { fill: themeData[`menu.item.checkmark.active.iconColor`], opacity: 1 } : {})
+        // add hasHover
       }
     },
     assetWrapper: {
       display: `flex`,
       justifyContent: `center`,
-      marginRight: themeData[`density.spacings.extraSmall`],
+      marginRight: themeData[`menu.item.paddingHorizontal`],
       fontWeight: 400
     },
     optionContentWrapper: {
       width: `100%`
     },
     shortcutWrapper: {
-      color: `red`,
+      color: themeData[`menu.keyboardShortcut.fontColor`],
+      fontSize: themeData[`menu.keyboardShortcut.fontSize`],
       float: `right`,
-      fontWeight: themeData[`basics.fontWeights.regular`]
+      fontWeight: themeData[`menu.keyboardShortcut.fontWeight`]
     }
   };
 // console.log(props);
