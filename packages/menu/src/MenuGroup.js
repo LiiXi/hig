@@ -89,6 +89,7 @@ export default class MenuGroup extends Component {
   handleKeyDown = event => {
     const {
       getHighlightIndex,
+      getOptionsInfo,
       props,
       setActiveOption,
       setHighlightIndex
@@ -99,12 +100,13 @@ export default class MenuGroup extends Component {
     } = props;
     const options = this.state.optionInfo;
     const highlightableIndexes = [];
+    const viewportHeight = document.documentElement.clientHeight;
 
     if (onKeyDown) {
       onKeyDown(event);
     }
 
-    console.log(event.target.children);
+    // console.log(event.target.children);
 
     // Set up the what can be highlighted
     for (const index in options) {
@@ -116,15 +118,25 @@ export default class MenuGroup extends Component {
     switch (event.keyCode) {
       // Arrow Down
       case 40: {
-        
         const currentIndex = highlightableIndexes.indexOf(getHighlightIndex());
         const lastIndex = highlightableIndexes.length - 1;
+        // const highlightedId = getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id;
+        // const highlightedIdNode = document.getElementById(highlightedId);
+        // const highlightedIdTop = highlightedIdNode.getBoundingClientRect().top;
 
         if (currentIndex === lastIndex) {
           setHighlightIndex(highlightableIndexes[0]);
+          // highlightedIdNode.scrollIntoView(true);
+          document.getElementById(getOptionsInfo()[highlightableIndexes[0] - 1].id).scrollIntoView(true);
         } else {
+          // console.log();
           setHighlightIndex(highlightableIndexes[currentIndex + 1]);
+          document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id).scrollIntoView(false);
+          // highlightedIdNode.scrollIntoView(false);
         }
+        // if (highlightedIdTop > viewportHeight) {
+        // highlightedIdNode.scrollIntoView(false);
+        // }
 
         event.preventDefault();
         break;

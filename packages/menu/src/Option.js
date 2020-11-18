@@ -70,6 +70,7 @@ export default class Option extends Component {
               isActive
             }) => (
               <OptionPresenter
+                {...otherProps}
                 asset={asset}
                 checkmark={checkmark}
                 disabled={disabled}

@@ -71,6 +71,7 @@ export default class OptionPresenter extends Component {
           return (
             <li
               // conditional payload for aria-selected
+              {...otherProps}
               {...ariaPayload}
               className={css(styles.menuOption)}
               disabled={disabled}
