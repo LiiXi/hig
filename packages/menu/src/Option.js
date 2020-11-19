@@ -67,6 +67,7 @@ export default class Option extends Component {
               handleClick,
               handleMouseEnter,
               handleMouseLeave,
+              handleMouseMove,
               isActive
             }) => (
               <OptionPresenter
@@ -81,6 +82,7 @@ export default class Option extends Component {
                 onMouseDown={handleMouseDown}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 role={role}
                 selected={isActive()}

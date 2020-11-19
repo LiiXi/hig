@@ -19,7 +19,7 @@ export default function stylesheet(props, themeData) {
   } = props;
   const styles = {
     menu: {
-      borderBottom: divider ? `1px solid red` : {},
+      borderBottom: divider ? `1px solid ${themeData[`menu.divider.backgroundColor`]}` : {},
       boxSizing: `border-box`,
       cursor: `pointer`,
       fontFamily: themeData[`menu.fontFamily`],
@@ -27,11 +27,12 @@ export default function stylesheet(props, themeData) {
       listStyle: `none`,
       margin: 0,
       outline: 0,
-      padding: 0
+      padding: `${themeData["menu.container.paddingVertical"]} 0`
       
     },
     menuOption: {
       display: `flex`,
+      color: themeData[`menu.label.fontColor`],
       fontSize: themeData[`menu.label.fontSize`],
       alignItems: `center`,
       minHeight: themeData[`menu.item.minHeight`],
@@ -51,6 +52,7 @@ export default function stylesheet(props, themeData) {
       marginRight: themeData[`menu.item.paddingHorizontal`],
       "& > svg > *": {
         opacity: 0,
+        ...(highlighted ? { fill: themeData[`menu.item.checkmark.hover.iconColor`], opacity: 1 } : {}),
         ...(selected ? { fill: themeData[`menu.item.checkmark.active.iconColor`], opacity: 1 } : {})
         // add hasHover
       }
@@ -62,15 +64,17 @@ export default function stylesheet(props, themeData) {
       fontWeight: 400
     },
     optionContentWrapper: {
+      display: `flex`,
       width: `100%`
     },
     shortcutWrapper: {
       color: themeData[`menu.keyboardShortcut.fontColor`],
       fontSize: themeData[`menu.keyboardShortcut.fontSize`],
-      float: `right`,
-      fontWeight: themeData[`menu.keyboardShortcut.fontWeight`]
+      alignSelf: `center`,
+      fontWeight: themeData[`menu.keyboardShortcut.fontWeight`],
+      marginLeft: `auto`
     }
   };
-// console.log(props);
+  // console.log(hasHover);
   return customStylesheet ? customStylesheet(styles, props, themeData) : styles;
 }

@@ -12,7 +12,12 @@ export default function renderStory(props, component) {
     <KnobbedThemeProvider>
       <div style={{ width: "300px" }}>
         <Surface borderRadius="m" shadow="low">
-          <HIGComponent {...otherProps} onChange={active => {console.log(active)}}>{children}</HIGComponent>
+          <HIGComponent
+            {...otherProps}
+            // onChange={active => {console.log(active)}}
+          >
+            {children}
+          </HIGComponent>
         </Surface>
       </div>
     </KnobbedThemeProvider>

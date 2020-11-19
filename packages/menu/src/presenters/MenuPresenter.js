@@ -105,7 +105,6 @@ export default class MenuPresenter extends Component {
     return (
       <ThemeContext.Consumer>
         {({ resolvedRoles }) => {
-
           const styles = stylesheet({ divider, stylesheet: customStylesheet }, resolvedRoles);
 
           return (

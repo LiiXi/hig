@@ -48,6 +48,7 @@ export default class OptionPresenter extends Component {
       onMouseDown,
       onMouseEnter,
       onMouseLeave,
+      onMouseMove,
       onMouseUp,
       role
     } = otherProps;
@@ -67,8 +68,7 @@ export default class OptionPresenter extends Component {
             stylesheet: customStylesheet
           }, resolvedRoles);
           const Checkmark = metadata.densityId === `medium-density` ? CheckmarkSUI : CheckmarkXsUI;
-
-          return (
+                    return (
             <li
               // conditional payload for aria-selected
               {...otherProps}
@@ -83,6 +83,7 @@ export default class OptionPresenter extends Component {
               onMouseDown={onMouseDown}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
+              onMouseMove={onMouseMove}
               onMouseUp={onMouseUp}
               selected={selected}
             >

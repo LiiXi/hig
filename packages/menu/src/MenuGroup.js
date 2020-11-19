@@ -76,14 +76,16 @@ export default class MenuGroup extends Component {
     if (this.props.onFocus) {
       this.props.onFocus(event);
     }
+    /// do we need handleFocus?
+    // console.log('focus');
   }
 
   handleBlur = event => {
     if (this.props.onBlur) {
       this.props.onBlur(event);
     }
-
-    this.setHighlightIndex(0);
+console.log('blur');
+    // this.setHighlightIndex(0);
   }
 
   handleKeyDown = event => {
@@ -132,6 +134,7 @@ export default class MenuGroup extends Component {
           // console.log();
           setHighlightIndex(highlightableIndexes[currentIndex + 1]);
           document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id).scrollIntoView(false);
+          // console.log(document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id).getBoundingClientRect().top);
           // highlightedIdNode.scrollIntoView(false);
         }
         // if (highlightedIdTop > viewportHeight) {
@@ -149,8 +152,10 @@ export default class MenuGroup extends Component {
         
         if (currentIndex <= 0) {
           setHighlightIndex(highlightableIndexes[lastIndex]);
+          document.getElementById(getOptionsInfo()[highlightableIndexes[lastIndex] - 1].id).scrollIntoView(false);
         } else {
           setHighlightIndex(highlightableIndexes[currentIndex - 1]);
+          document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id).scrollIntoView(false);
         }
         event.preventDefault();
         break;
