@@ -129,7 +129,7 @@ console.log('blur');
         if (currentIndex === lastIndex) {
           setHighlightIndex(highlightableIndexes[0]);
           // highlightedIdNode.scrollIntoView(true);
-          document.getElementById(getOptionsInfo()[highlightableIndexes[0] - 1].id).scrollIntoView(true);
+          document.getElementById(getOptionsInfo()[highlightableIndexes[0] - 1].id).scrollIntoView(false);
         } else {
           // console.log();
           setHighlightIndex(highlightableIndexes[currentIndex + 1]);

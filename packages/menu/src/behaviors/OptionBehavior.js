@@ -13,16 +13,16 @@ export default class OptionBehavior extends Component {
     // children: PropTypes.func
   };
   // remove
-  /* constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
-      highlightable: false
+      // onMoveEnter: false
     };
-
+    this.onMoveEnter = true;
     this.timer = null;
     this.timerSet = false;
-} */
+  }
 
   getIndexFromId = (id) => {
     const options = this.props.getOptionsInfo();
@@ -67,17 +67,17 @@ export default class OptionBehavior extends Component {
   }
 
   handleMouseEnter = event => {
+
+    console.log('enter');
     if (this.props.onMouseEnter) {
       this.props.onMouseEnter(event);
     }
+
     if (this.props.disabled || this.props.role === `presentation`) {
       return;
     }
-
-    // console.log('enter');
-    /* if (!this.state.highlightable) {
-      return;
-    } */
+    
+    console.log(event.target);
 
     if (this.props.setHighlightIndex) {
       this.props.setHighlightIndex(Number(this.getIndexFromId(this.props.id)) + 1);
@@ -89,7 +89,11 @@ export default class OptionBehavior extends Component {
     if (this.props.onMouseLeave) {
       this.props.onMouseLeave(event);
     }
-// console.log('leave');
+
+    if (!this.onMoveEnter) {
+      return;
+    }
+
     if (this.props.setHighlightIndex) {
       this.props.setHighlightIndex(0);
     }
@@ -99,6 +103,7 @@ export default class OptionBehavior extends Component {
 
  // remove
   handleMouseMove = event => {
+    console.log('move');
     if (this.props.onMouseMove) {
       this.props.onMouseMove(event);
     }
@@ -106,14 +111,17 @@ export default class OptionBehavior extends Component {
     if (this.timerSet) {
       this.clearTimer();
     }
+    this.onMoveEnter = true;
+    this.timerSet = false;
 
     // console.log('moving');
 
     if (!this.timerSet) {
       this.timer = setTimeout(() => {
-        // console.log('not moving')
+        this.onMoveEnter = false;
       }, 100);
       this.timerSet = true;
+    
     }
 
 
