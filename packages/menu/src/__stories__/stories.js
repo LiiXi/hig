@@ -8,7 +8,7 @@ export default [
     description: "default",
     getProps: () => ({
       multiple: false,
-      checkmark: true,
+      checkmark: false,
       children: [
         <Option
           id="test-1"
@@ -17,7 +17,7 @@ export default [
         >
           test 1
         </Option>,
-        <Option id="blah-2" shortcut={<span>&#8984; 5</span>}>test 2</Option>,
+        <Option id="blah-2">test 2</Option>,
         <Option id="uhm-3">test 3</Option>,
         <Option id="blahasdf" disabled>test 4</Option>,
         <Option id="another one">test 5</Option>,

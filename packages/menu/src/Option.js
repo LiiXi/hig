@@ -18,12 +18,7 @@ export default class Option extends Component {
   };
 
   componentDidMount() {
-    if (this.props.setActiveOption) {
-      // this.props.setActiveOption(this.props.id);
-    }
-    if (this.props.setHighlightIndex) {
-      // this.props.setKeyboardHoverOptionIndex(this.props.id);
-    }
+
   }
 
   render() {
@@ -67,7 +62,7 @@ export default class Option extends Component {
               handleClick,
               handleMouseEnter,
               handleMouseLeave,
-              handleMouseMove,
+              handleMouseOver,
               isActive
             }) => (
               <OptionPresenter
@@ -82,7 +77,7 @@ export default class Option extends Component {
                 onMouseDown={handleMouseDown}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                onMouseMove={handleMouseMove}
+                onMouseOver={handleMouseOver}
                 onMouseUp={handleMouseUp}
                 role={role}
                 selected={isActive()}

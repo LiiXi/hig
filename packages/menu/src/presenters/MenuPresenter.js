@@ -48,11 +48,13 @@ export default class MenuPresenter extends Component {
       getActiveOption,
       getHighlightIndex,
       getOptionsInfo,
-      onBlur,
+      getPreviousEvent,
+      // onBlur,
       onFocus,
-      onKeyDown,
+      // onKeyDown,
       setActiveOption,
-      setHighlightIndex
+      setHighlightIndex,
+      // setPreviousEvent
     } = this.props;
     const payload = {
       ...props,
@@ -60,12 +62,14 @@ export default class MenuPresenter extends Component {
       getActiveOption,
       getHighlightIndex,
       getOptionsInfo,
+      getPreviousEvent,
       key,
-      onBlur,
+      // onBlur,
       onFocus,
-      onKeyDown,
+      // onKeyDown,
       setActiveOption,
-      setHighlightIndex
+      setHighlightIndex,
+      // setPreviousEvent - do we need to set?
     };
 
     return <Option {...payload} />;
@@ -98,6 +102,7 @@ export default class MenuPresenter extends Component {
       onBlur,
       onFocus,
       onKeyDown,
+      onMouseMove,
       role,
       tabIndex
     } = otherProps;
@@ -114,6 +119,7 @@ export default class MenuPresenter extends Component {
               onBlur={onBlur}
               onFocus={onFocus}
               onKeyDown={onKeyDown}
+              onMouseMove={onMouseMove}
               role={role || "listbox"}// conditional or required
               tabIndex={tabIndex || "0"} // conditional w/ MenuGroup
             >

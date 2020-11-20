@@ -54,7 +54,6 @@ export default function stylesheet(props, themeData) {
         opacity: 0,
         ...(highlighted ? { fill: themeData[`menu.item.checkmark.hover.iconColor`], opacity: 1 } : {}),
         ...(selected ? { fill: themeData[`menu.item.checkmark.active.iconColor`], opacity: 1 } : {})
-        // add hasHover
       }
     },
     assetWrapper: {

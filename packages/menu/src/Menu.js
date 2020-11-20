@@ -43,7 +43,7 @@ export default class Menu extends Component {
     } = otherProps;
 
     return (
-      <FocusBehavior
+      <FocusBehavior // do i need this?
         onBlur={onBlur}
         onFocus={onFocus}
       >
@@ -65,12 +65,15 @@ export default class Menu extends Component {
               getActiveOption,
               getHighlightIndex,
               getOptionsInfo,
+              getPreviousEvent,
               handleBlur,
               handleFocus,
               handleKeyDown,
+              handleMouseMove,
               setActiveOption,
               setHighlightIndex,
-              setOptionsInfo
+              setOptionsInfo,
+              setPreviousEvent
             }) => (
               <MenuPresenter
                 checkmark={checkmark}
@@ -78,12 +81,15 @@ export default class Menu extends Component {
                 getActiveOption={getActiveOption}
                 getHighlightIndex={getHighlightIndex}
                 getOptionsInfo={getOptionsInfo}
+                getPreviousEvent={getPreviousEvent}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
                 onKeyDown={handleKeyDown}
+                onMouseMove={handleMouseMove}
                 setActiveOption={setActiveOption}
                 setHighlightIndex={setHighlightIndex}
                 setOptionsInfo={setOptionsInfo}
+                setPreviousEvent={setPreviousEvent}
                 stylesheet={stylesheet}
                 {...otherProps}
               >

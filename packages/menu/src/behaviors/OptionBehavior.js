@@ -68,16 +68,19 @@ export default class OptionBehavior extends Component {
 
   handleMouseEnter = event => {
 
-    console.log('enter');
+    console.log(this.props.getPreviousEvent());
     if (this.props.onMouseEnter) {
       this.props.onMouseEnter(event);
+    }
+
+    // we don't want to set the highlight state on hover when scrolling via keyboard
+    if (this.props.getPreviousEvent() === `keydown`) {
+      return;
     }
 
     if (this.props.disabled || this.props.role === `presentation`) {
       return;
     }
-    
-    console.log(event.target);
 
     if (this.props.setHighlightIndex) {
       this.props.setHighlightIndex(Number(this.getIndexFromId(this.props.id)) + 1);
@@ -90,7 +93,8 @@ export default class OptionBehavior extends Component {
       this.props.onMouseLeave(event);
     }
 
-    if (!this.onMoveEnter) {
+    // we don't want to set the highlight state on hover when scrolling via keyboard
+    if (this.props.getPreviousEvent() === `keydown`) {
       return;
     }
 
@@ -100,10 +104,9 @@ export default class OptionBehavior extends Component {
   }
 
 
-
  // remove
   handleMouseMove = event => {
-    console.log('move');
+    // console.log('move');
     if (this.props.onMouseMove) {
       this.props.onMouseMove(event);
     }
@@ -155,7 +158,6 @@ export default class OptionBehavior extends Component {
       handleClick,
       handleMouseEnter,
       handleMouseLeave,
-      handleMouseMove,
       isActive
     } = this;
 
@@ -164,7 +166,6 @@ export default class OptionBehavior extends Component {
       handleClick,
       handleMouseEnter,
       handleMouseLeave,
-      handleMouseMove,
       isActive
     });
   }
