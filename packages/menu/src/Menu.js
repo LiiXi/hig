@@ -4,10 +4,17 @@ import { FocusBehavior } from "@hig/behaviors";
 
 import MenuBehavior from "./behaviors/MenuBehavior";
 import MenuPresenter from "./presenters/MenuPresenter";
-// import { MenuItemsPropType } from "./propTypes";
 
 export default class Menu extends Component {
   static propTypes = {
+    /**
+     * Shows a checkmark selection indicator
+     */
+    checkmark: PropTypes.bool,
+    /**
+     * Accepts Option components
+     */
+    children: PropTypes.node,
     /**
      * Shows a divider at the bottom of the menu
      */
@@ -16,6 +23,10 @@ export default class Menu extends Component {
      * Enables multiple selection
      */
     multiple: PropTypes.bool,
+    /**
+     * Called when an option is selected/unselected
+     */
+    onChange: PropTypes.func,
     /**
      * Adds custom/overriding styles
      */

@@ -14,7 +14,6 @@ export default function renderStory(props, component) {
         <Surface borderRadius="m" shadow="low">
           <HIGComponent
             {...otherProps}
-            // onChange={active => {console.log(active)}}
           >
             {children}
           </HIGComponent>

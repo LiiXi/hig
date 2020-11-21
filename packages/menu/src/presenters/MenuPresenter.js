@@ -1,6 +1,6 @@
 import React, { Children, Component } from "react";
 import PropTypes from "prop-types";
-import { css, cx } from "emotion";
+import { cx, css } from "emotion";
 import { ThemeContext } from "@hig/theme-context";
 import { createCustomClassNames } from "@hig/utils";
 
@@ -13,7 +13,7 @@ import stylesheet from "./stylesheet";
  */
 function createOptions(children) {
   return Children.toArray(children).reduce((result, child, index) => {
-    const { type, key, props = {index} } = child;
+    const { type, key, props = { index } } = child;
 
     if (type === Option) {
       result.push({ key, props });
@@ -25,12 +25,22 @@ function createOptions(children) {
 
 export default class MenuPresenter extends Component {
   static propTypes = {
-    
+    children: PropTypes.node,
+    divider: PropTypes.bool,
+    stylesheet: PropTypes.func
   };
 
   static defaultProps = {
     
   };
+
+  componentDidMount() {
+    const optionsInfo = {};
+    React.Children.forEach(this.props.children, (child, index) => {
+      optionsInfo[index] = child.props;
+    });
+    this.props.setOptionsInfo(optionsInfo);
+  }
 
   /** @returns {TabMeta[]} */
   getOptions() {
@@ -49,12 +59,9 @@ export default class MenuPresenter extends Component {
       getHighlightIndex,
       getOptionsInfo,
       getPreviousEvent,
-      // onBlur,
       onFocus,
-      // onKeyDown,
       setActiveOption,
-      setHighlightIndex,
-      // setPreviousEvent
+      setHighlightIndex
     } = this.props;
     const payload = {
       ...props,
@@ -64,12 +71,9 @@ export default class MenuPresenter extends Component {
       getOptionsInfo,
       getPreviousEvent,
       key,
-      // onBlur,
       onFocus,
-      // onKeyDown,
       setActiveOption,
-      setHighlightIndex,
-      // setPreviousEvent - do we need to set?
+      setHighlightIndex
     };
 
     return <Option {...payload} />;
@@ -82,14 +86,6 @@ export default class MenuPresenter extends Component {
     return this.getOptions().map(this.renderOption);
   }
 
-  componentDidMount() {
-    const optionsInfo = {};
-    React.Children.forEach(this.props.children, (child, index) => {
-      optionsInfo[index] = child.props;
-    })
-    this.props.setOptionsInfo(optionsInfo);
-  }
-
   render() {
     const {
       children,
@@ -99,10 +95,10 @@ export default class MenuPresenter extends Component {
     } = this.props;
     const {
       id,
-      onBlur,
-      onFocus,
-      onKeyDown,
-      onMouseMove,
+      // onBlur,
+      // onFocus,
+      // onKeyDown,
+      // onMouseMove,
       role,
       tabIndex
     } = otherProps;
@@ -110,17 +106,21 @@ export default class MenuPresenter extends Component {
     return (
       <ThemeContext.Consumer>
         {({ resolvedRoles }) => {
-          const styles = stylesheet({ divider, stylesheet: customStylesheet }, resolvedRoles);
+          const styles = stylesheet(
+            { divider, stylesheet: customStylesheet },
+            resolvedRoles
+          );
 
           return (
             <ul
+              {...otherProps}
               className={css(styles.menu)}
               id={id}
-              onBlur={onBlur}
-              onFocus={onFocus}
-              onKeyDown={onKeyDown}
-              onMouseMove={onMouseMove}
-              role={role || "listbox"}// conditional or required
+              // onBlur={onBlur}
+              // onFocus={onFocus}
+              // onKeyDown={onKeyDown}
+              // onMouseMove={onMouseMove}
+              role={role || "listbox"} // conditional or required
               tabIndex={tabIndex || "0"} // conditional w/ MenuGroup
             >
               {this.renderOptions()}

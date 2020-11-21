@@ -12,17 +12,6 @@ export default class OptionBehavior extends Component {
     // onKeyUp: PropTypes.func,
     // children: PropTypes.func
   };
-  // remove
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // onMoveEnter: false
-    };
-    this.onMoveEnter = true;
-    this.timer = null;
-    this.timerSet = false;
-  }
 
   getIndexFromId = (id) => {
     const options = this.props.getOptionsInfo();
@@ -67,8 +56,6 @@ export default class OptionBehavior extends Component {
   }
 
   handleMouseEnter = event => {
-
-    console.log(this.props.getPreviousEvent());
     if (this.props.onMouseEnter) {
       this.props.onMouseEnter(event);
     }
@@ -102,43 +89,6 @@ export default class OptionBehavior extends Component {
       this.props.setHighlightIndex(0);
     }
   }
-
-
- // remove
-  handleMouseMove = event => {
-    // console.log('move');
-    if (this.props.onMouseMove) {
-      this.props.onMouseMove(event);
-    }
-
-    if (this.timerSet) {
-      this.clearTimer();
-    }
-    this.onMoveEnter = true;
-    this.timerSet = false;
-
-    // console.log('moving');
-
-    if (!this.timerSet) {
-      this.timer = setTimeout(() => {
-        this.onMoveEnter = false;
-      }, 100);
-      this.timerSet = true;
-    
-    }
-
-
-    /* if (this.state.highlightable) {
-      return;
-    }
-
-    this.setState({highlightable: true}) */
-  }
-  // remove
-  clearTimer = () => {
-    clearTimeout(this.timer);
-    this.timerSet = false;
-  };
 
   isActive = () => {
     const multiple = Array.isArray(this.props.getActiveOption()) ? true : false;

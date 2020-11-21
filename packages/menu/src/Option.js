@@ -1,43 +1,66 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { css, cx } from "emotion";
 import { PressedBehavior } from "@hig/behaviors";
-import { ThemeContext } from "@hig/theme-context";
 
 import OptionBehavior from "./behaviors/OptionBehavior";
 import OptionPresenter from "./presenters/OptionPresenter";
 
-import { variants, AVAILABLE_VARIANTS } from "./constants";
+import { roles, AVAILABLE_ROLES } from "./constants";
 
 export default class Option extends Component {
   static propTypes = {
+    /**
+     * Allows for an asset before the Option text
+     * Can be from @hig/avatars, @hig/icons or
+     * whatever image of yor choosing
+     */
+    asset: PropTypes.node,
+    /**
+     * Content of the Option
+     */
+    children: PropTypes.node.isRequired,
+    /**
+     * Disables the Options
+     */
+    disabled: PropTypes.bool,
+    /**
+     * HTML attribute for accessibility
+     */
+    role: PropTypes.oneOf(AVAILABLE_ROLES),
+    /**
+     * Allows for a keyboard shortcut or any
+     * content to the right of the Option content
+     */
+    shortcut: PropTypes.node,
+    /**
+     * Adds custom/overriding styles
+     */
+    stylesheet: PropTypes.func
   };
 
   static defaultProps = {
-    role: "option"
+    role: roles.OPTION
   };
-
-  componentDidMount() {
-
-  }
 
   render() {
     const {
       asset,
       children,
       disabled,
+      role,
       shortcut,
       stylesheet,
       ...otherProps
     } = this.props;
     const {
       checkmark,
-      id,
+      id, // is this required?
       getHighlightIndex,
+      onFocus,
       onMouseDown,
       onMouseLeave,
       onMouseUp,
-      role
+      // role
     } = otherProps;
 
     return (
@@ -74,6 +97,7 @@ export default class Option extends Component {
                 id={id}
                 isPressed={isPressed}
                 onClick={handleClick}
+                onFocus={onFocus}
                 onMouseDown={handleMouseDown}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}

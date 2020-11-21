@@ -9,32 +9,53 @@ import Menu from "../Menu";
 
 /**
  * @param {ReactNode} children
- * @returns {OptionMeta[]}
+ * @returns {MenuMeta[]}
  */
-function createOptions(children) {
+function createMenus(children) {
   return Children.toArray(children).reduce((result, child, index) => {
-      const { type, key, props = {index} } = child;
+    const { type, key, props = { index } } = child;
 
-      if (type === Menu) {
-      result.push({ key, props });
-      }
+    if (type === Menu) {
+    result.push({ key, props });
+    }
 
-      return result;
+    return result;
   }, []);
 }
 
 export default class MenuGroupPresenter extends Component {
-  /** @returns {TabMeta[]} */
-  getOptions() {
-    return createOptions(this.props.children);
+  componentDidMount() {
+    // new name needed
+    const optionsInfo = {};
+    const mergedOptions = [];
+    // const totalMenus = React.Children.count(this.props.children);
+    React.Children.forEach(this.props.children, (child, index) => {
+      // console.log(child.props);
+      optionsInfo[index] = child.props;
+      //  console.log(optionsInfo[index].children);
+      // console.log(child.props["role"]);
+    });
+
+    for (const index in optionsInfo) {
+      optionsInfo[index].children.forEach(child =>
+        mergedOptions.push(child.props))
+      ;
+    }
+
+    this.props.setOptionsInfo(mergedOptions);
+  }
+
+  /** @returns {MenuMeta[]} */
+  getMenus() {
+    return createMenus(this.props.children);
   }
 
   /**
-   * @param {TabMeta} tab
+   * @param {MenuMeta} tab
    * @param {number} index
    * @returns {JSX.Element}
    */
-  renderOption = ({ key, props }) => {
+  renderMenu = ({ key, props }) => {
     const {
       getActiveOption,
       getHighlightIndex,
@@ -74,44 +95,21 @@ export default class MenuGroupPresenter extends Component {
   /**
    * @returns {JSX.Element}
    */
-  renderOptions() {
-    return this.getOptions().map(this.renderOption);
-  }
-
-  componentDidMount() {
-    // console.log('menugroup componentDidMount');
-    // new name needed
-    const optionsInfo = {};
-    const mergedOptions = [];
-    // const totalMenus = React.Children.count(this.props.children);
-    React.Children.forEach(this.props.children, (child, index) => {
-      // console.log(child.props);
-      optionsInfo[index] = child.props;
-      //  console.log(optionsInfo[index].children);
-      // console.log(child.props["role"]);
-    });
-
-    for (const index in optionsInfo) {
-      optionsInfo[index].children.forEach(child => mergedOptions.push(child.props));
-    }
-
-    this.props.setOptionsInfo(mergedOptions);
-    
+  renderMenus() {
+    return this.getMenus().map(this.renderMenu);
   }
 
   render() {
-    // console.log(this.state);
     const {
       // children,
       ...otherProps
     } = this.props;
 
-    const {} = otherProps;
+    const { className } = otherProps;
 
     return (
       <ThemeContext.Consumer>
         {({ resolvedRoles, metadata }) => {
-
           // const styles = stylesheet(this.props, resolvedRoles);
 
           return (
@@ -124,7 +122,7 @@ export default class MenuGroupPresenter extends Component {
               role="listbox" // conditional or required
               tabIndex="0" // conditional w/ MenuGroup
             >
-              {this.renderOptions()}
+              {this.renderMenus()}
             </div>
           );
         }}

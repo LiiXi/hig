@@ -1,8 +1,6 @@
-export const variants = Object.freeze({
-  BASIC: "basic",
-  WITH_ICON: "withIcon",
-  WITH_AVATAR: "withAvatar",
-  WITH_THUMB: "withThumb"
+export const roles = Object.freeze({
+  OPTION: "option",
+  PRESENTATION: "presentation"
 });
 
-export const AVAILABLE_VARIANTS = Object.freeze(Object.values(variants));
+export const AVAILABLE_ROLES = Object.freeze(Object.values(roles));

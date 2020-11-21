@@ -1,21 +1,42 @@
-import React, { Children, Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { css, cx } from "emotion";
 // import { ThemeContext } from "@hig/theme-context";
 import { createCustomClassNames } from "@hig/utils";
 
 import MenuBehavior from "./behaviors/MenuBehavior";
 import MenuGroupPresenter from "./presenters/MenuGroupPresenter"
-// import Menu from "./Menu";
-// import stylesheet from "./stylesheet";
 
 export default class MenuGroup extends Component {
+  static propTypes = {
+    /**
+     * Accepts Menu components
+     */
+    children: PropTypes.node,
+    /**
+     * Enables multiple selection
+     * This will take precedent over the Menu prop
+     * of the same name
+     */
+    multiple: PropTypes.bool,
+    /**
+     * Called when an option is selected/unselected
+     * This will take precedent over the Menu prop of the
+     * same name
+     */
+    onChange: PropTypes.func,
+    /**
+     * Adds custom/overriding styles
+     * This will take precedent over the Menu prop of the
+     * same name
+     */
+    stylesheet: PropTypes.func
+  };
 
   render() {
     const {
-      checkmark,
+      // checkmark,
       children,
-      divider,
+      // divider,
       multiple,
       onChange,
       stylesheet,
@@ -48,7 +69,6 @@ export default class MenuGroup extends Component {
           setPreviousEvent
         }) => (
           <MenuGroupPresenter
-            checkmark={checkmark}
             getActiveOption={getActiveOption}
             getHighlightIndex={getHighlightIndex}
             getOptionsInfo={getOptionsInfo}

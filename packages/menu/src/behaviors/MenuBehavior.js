@@ -94,7 +94,7 @@ export default class MenuBehavior extends Component {
       onKeyDown(event);
     }
 
-    // Set up the what can be highlighted
+    // Set up options that can be highlighted
     for (const index in options) {
       if (!options[index].disabled && options[index].role !== `presentation`) {
         highlightableIndexes.push(Number(index) + 1);
@@ -115,6 +115,9 @@ export default class MenuBehavior extends Component {
         } else {
           setHighlightIndex(highlightableIndexes[currentIndex + 1]);
           document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id).scrollIntoView(false);
+
+          console.log(document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id).getBoundingClientRect().top);
+          console.log(window.innerHeight);
         }
 
         event.preventDefault();

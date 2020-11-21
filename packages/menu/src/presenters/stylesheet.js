@@ -4,7 +4,7 @@ function getRulesByPresentation(themeData) {
     color: themeData[`menu.header.fontColor`],
     opacity: 0.5,
     textTransform: `uppercase`
-  }
+  };
 }
 
 export default function stylesheet(props, themeData) {
@@ -19,16 +19,16 @@ export default function stylesheet(props, themeData) {
   } = props;
   const styles = {
     menu: {
-      borderBottom: divider ? `1px solid ${themeData[`menu.divider.backgroundColor`]}` : {},
+      borderBottom: divider
+        ? `1px solid ${themeData[`menu.divider.backgroundColor`]}`
+        : {},
       boxSizing: `border-box`,
       cursor: `pointer`,
       fontFamily: themeData[`menu.fontFamily`],
-      // fontSize: themeData[`density.fontSizes.medium`],
       listStyle: `none`,
       margin: 0,
       outline: 0,
       padding: `${themeData["menu.container.paddingVertical"]} 0`
-      
     },
     menuOption: {
       display: `flex`,
@@ -36,11 +36,20 @@ export default function stylesheet(props, themeData) {
       fontSize: themeData[`menu.label.fontSize`],
       alignItems: `center`,
       minHeight: themeData[`menu.item.minHeight`],
-      padding: `${themeData["menu.item.paddingVertical"]} ${themeData["menu.item.paddingHorizontal"]}`,
-      ...(selected ? { fontWeight: themeData[`menu.label.selected.fontWeight`] } : { fontWeight: themeData[`menu.label.default.fontWeight`] }),
-      ...(highlighted ? { backgroundColor: themeData[`menu.item.hover.backgroundColor`] } : {}),
-      ...(isPressed && (!disabled && role !== `presentation`) ? { backgroundColor: themeData[`menu.item.pressed.backgroundColor`] } : {}),
-      ...(disabled ? { opacity: themeData[`colorScheme.opacity.disabled`] } : {}),
+      padding: `${themeData["menu.item.paddingVertical"]}
+        ${themeData["menu.item.paddingHorizontal"]}`,
+      ...(selected
+        ? { fontWeight: themeData[`menu.label.selected.fontWeight`] }
+        : { fontWeight: themeData[`menu.label.default.fontWeight`] }),
+      ...(highlighted
+        ? { backgroundColor: themeData[`menu.item.hover.backgroundColor`] }
+        : {}),
+      ...(isPressed && (!disabled && role !== `presentation`)
+        ? { backgroundColor: themeData[`menu.item.pressed.backgroundColor`] }
+        : {}),
+      ...(disabled
+        ? { opacity: themeData[`colorScheme.opacity.disabled`] }
+        : {}),
       ...(role === `presentation` ? getRulesByPresentation(themeData) : {})
     },
     checkmarkWrapper: {
@@ -52,8 +61,18 @@ export default function stylesheet(props, themeData) {
       marginRight: themeData[`menu.item.paddingHorizontal`],
       "& > svg > *": {
         opacity: 0,
-        ...(highlighted ? { fill: themeData[`menu.item.checkmark.hover.iconColor`], opacity: 1 } : {}),
-        ...(selected ? { fill: themeData[`menu.item.checkmark.active.iconColor`], opacity: 1 } : {})
+        ...(highlighted
+          ? {
+              fill: themeData[`menu.item.checkmark.hover.iconColor`],
+              opacity: 1
+            }
+          : {}),
+        ...(selected
+          ? {
+              fill: themeData[`menu.item.checkmark.active.iconColor`],
+              opacity: 1
+            }
+          : {})
       }
     },
     assetWrapper: {
@@ -74,6 +93,6 @@ export default function stylesheet(props, themeData) {
       marginLeft: `auto`
     }
   };
-  // console.log(hasHover);
+
   return customStylesheet ? customStylesheet(styles, props, themeData) : styles;
 }
