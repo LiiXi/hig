@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import { boolean } from "@storybook/addon-knobs/react";
 
 import Menu from "../index";
@@ -5,7 +6,8 @@ import Menu from "../index";
 const knobGroupIds = { basic: "Basic" };
 const knobLabels = {
   checkmark: "Checkmark",
-  multiple: "Multiple"
+  multiple: "Multiple",
+  onChange: "onChange"
 };
 
 export default function getKnobs(props, component) {
@@ -17,6 +19,7 @@ export default function getKnobs(props, component) {
   return {
     ...otherProps,
     ...conditionalKnobs,
-    multiple: boolean(knobLabels.multiple, multiple, knobGroupIds.basic)
+    multiple: boolean(knobLabels.multiple, multiple, knobGroupIds.basic),
+    onChange: action(knobLabels.onChange),
   };
 }

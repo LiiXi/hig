@@ -69,13 +69,17 @@ export default class MenuBehavior extends Component {
     if (this.props.onFocus) {
       this.props.onFocus(event);
     }
+
+    event.stopPropagation();
+    console.log('focus');
   };
 
   handleBlur = event => {
     if (this.props.onBlur) {
       this.props.onBlur(event);
     }
-
+    console.log('blur');
+    event.stopPropagation();
     this.setHighlightIndex(0);
   };
 
@@ -199,6 +203,8 @@ export default class MenuBehavior extends Component {
 
   handleMouseMove = event => {
     // don't keep setting state
+    event.stopPropagation();
+
     if (this.getPreviousEvent() === event.type) {
       return;
     }

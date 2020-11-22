@@ -11,7 +11,7 @@ export default class MenuGroup extends Component {
     /**
      * Accepts Menu components
      */
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     /**
      * Enables multiple selection
      * This will take precedent over the Menu prop
@@ -30,6 +30,10 @@ export default class MenuGroup extends Component {
      * same name
      */
     stylesheet: PropTypes.func
+  };
+
+  static defaultProps = {
+    multiple: false
   };
 
   render() {
@@ -62,6 +66,7 @@ export default class MenuGroup extends Component {
           setPreviousEvent
         }) => (
           <MenuGroupPresenter
+            {...otherProps}
             getActiveOption={getActiveOption}
             getHighlightIndex={getHighlightIndex}
             getOptionsInfo={getOptionsInfo}
@@ -76,7 +81,6 @@ export default class MenuGroup extends Component {
             setOptionsInfo={setOptionsInfo}
             setPreviousEvent={setPreviousEvent}
             stylesheet={stylesheet}
-            {...otherProps}
           >
             {children}
           </MenuGroupPresenter>

@@ -56,13 +56,13 @@ export default class Menu extends Component {
       >
         {({ hasFocus, onBlur: handleBlur, onFocus: handleFocus }) => (
           <MenuBehavior
+            {...otherProps}
             hasFocus={hasFocus}
             multiple={multiple}
             onBlur={handleBlur}
             onChange={onChange}
             onFocus={handleFocus}
             onKeyDown={onKeyDown}
-            {...otherProps}
           >
             {({
               getActiveOption,
@@ -79,6 +79,7 @@ export default class Menu extends Component {
               setPreviousEvent
             }) => (
               <MenuPresenter
+                {...otherProps}
                 checkmark={checkmark}
                 divider={divider}
                 getActiveOption={getActiveOption}
@@ -95,7 +96,6 @@ export default class Menu extends Component {
                 setOptionsInfo={setOptionsInfo}
                 setPreviousEvent={setPreviousEvent}
                 stylesheet={stylesheet}
-                {...otherProps}
               >
                 {children}
               </MenuPresenter>
