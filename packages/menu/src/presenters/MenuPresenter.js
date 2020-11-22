@@ -88,6 +88,7 @@ export default class MenuPresenter extends Component {
 
   render() {
     const {
+      checkmark,
       children,
       divider,
       stylesheet: customStylesheet,
@@ -102,18 +103,31 @@ export default class MenuPresenter extends Component {
       role,
       tabIndex
     } = otherProps;
+    const payload = otherProps;
+    delete payload.getActiveOption;
+    delete payload.getHighlightIndex;
+    delete payload.getOptionsInfo;
+    delete payload.getPreviousEvent;
+    delete payload.setActiveOption;
+    delete payload.setHighlightIndex;
+    delete payload.setOptionsInfo;
+    delete payload.setPreviousEvent;
+
 
     return (
       <ThemeContext.Consumer>
         {({ resolvedRoles }) => {
           const styles = stylesheet(
-            { divider, stylesheet: customStylesheet },
+            {
+              checkmark,
+              divider,
+              stylesheet: customStylesheet
+            },
             resolvedRoles
           );
-
           return (
             <ul
-              {...otherProps}
+              {...payload}
               className={css(styles.menu)}
               id={id}
               // onBlur={onBlur}

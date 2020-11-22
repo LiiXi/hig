@@ -14,7 +14,7 @@ export default class Menu extends Component {
     /**
      * Accepts Option components
      */
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     /**
      * Shows a divider at the bottom of the menu
      */
@@ -34,7 +34,7 @@ export default class Menu extends Component {
   };
 
   static defaultProps = {
-   multiple: false
+    multiple: false
   };
 
   render() {
@@ -47,22 +47,14 @@ export default class Menu extends Component {
       stylesheet,
       ...otherProps
     } = this.props;
-    const {
-      onBlur,
-      onFocus,
-      onKeyDown
-    } = otherProps;
+    const { onBlur, onFocus, onKeyDown } = otherProps;
 
     return (
       <FocusBehavior // do i need this?
         onBlur={onBlur}
         onFocus={onFocus}
       >
-        {({
-          hasFocus,
-          onBlur: handleBlur,
-          onFocus: handleFocus,
-        }) => (
+        {({ hasFocus, onBlur: handleBlur, onFocus: handleFocus }) => (
           <MenuBehavior
             hasFocus={hasFocus}
             multiple={multiple}
@@ -77,8 +69,8 @@ export default class Menu extends Component {
               getHighlightIndex,
               getOptionsInfo,
               getPreviousEvent,
-              handleBlur,
-              handleFocus,
+              handleBlur: handleMenuBehaviorBlur,
+              handleFocus: handleMenuBehaviorFocus,
               handleKeyDown,
               handleMouseMove,
               setActiveOption,
@@ -93,8 +85,8 @@ export default class Menu extends Component {
                 getHighlightIndex={getHighlightIndex}
                 getOptionsInfo={getOptionsInfo}
                 getPreviousEvent={getPreviousEvent}
-                onBlur={handleBlur}
-                onFocus={handleFocus}
+                onBlur={handleMenuBehaviorBlur}
+                onFocus={handleMenuBehaviorFocus}
                 onKeyDown={handleKeyDown}
                 onMouseMove={handleMouseMove}
                 setActiveOption={setActiveOption}

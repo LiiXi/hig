@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { createCustomClassNames } from "@hig/utils";
 
 import MenuBehavior from "./behaviors/MenuBehavior";
-import MenuGroupPresenter from "./presenters/MenuGroupPresenter"
+import MenuGroupPresenter from "./presenters/MenuGroupPresenter";
 
 export default class MenuGroup extends Component {
   static propTypes = {
@@ -43,16 +43,16 @@ export default class MenuGroup extends Component {
       ...otherProps
     } = this.props;
 
-    const {
+    /* const {
       onKeyDown
-    } = otherProps;
+    } = otherProps; */
 
     return (
       <MenuBehavior
         {...otherProps}
         multiple={multiple}
         onChange={onChange}
-        onKeyDown={onKeyDown}
+        // onKeyDown={onKeyDown}
       >
         {({
           getActiveOption,

@@ -7,13 +7,12 @@ export default [
   {
     description: "default",
     getProps: () => ({
-      multiple: false,
-      checkmark: false,
+      multiple: true,
+      checkmark: true,
       children: [
         <Option
           id="test-1"
           role="presentation"
-          // onClick={event => {console.log(event.target.innerHTML)}}
         >
           test 1
         </Option>,
@@ -28,10 +27,10 @@ export default [
   {
     description: "grouped menus",
     getProps: () => ({
-      multiple: false,
       // checkmark: true, icon={<Avatar name="Maria McCaplin" size="medium" />}
+      // multiple: false,
       children: [
-        <Menu id="1" multiple="false" divider>
+        <Menu id="1" divider>
           <Option id="test-1" role="presentation">Group 1</Option>
           <Option id="blah-2">test 2</Option>
           <Option id="uhm-3">test 3</Option>
@@ -39,7 +38,7 @@ export default [
           <Option id="anotherone">test 5</Option>
           <Option id="another" disabled>test 6</Option>
         </Menu>,
-        <Menu id="3" multiple="false" divider>
+        <Menu id="3" divider>
           <Option id="test-1dddd" role="presentation">Group 2</Option>
           <Option id="blah-2dddd" asset={<AddFolder24 />} shortcut={<span>&#8984; 5</span>}>test 7</Option>
           <Option id="uhm-3ddddd" asset={<AddMember24 />} shortcut={<span>&#8984; 6</span>}>test 8</Option>
@@ -47,7 +46,7 @@ export default [
           <Option id="anothedddddddddrone" asset={<Cloud24 />} shortcut={<span>&#8984; 8</span>}>test 10</Option>
           <Option id="anothdddddddder" disabled asset={<Checklist24 />} shortcut={<span>&#8984; 9</span>}>test 11</Option>
         </Menu>,
-        <Menu checkmark multiple id="2" divider>
+        <Menu checkmark id="2" divider>
           <Option id="test-asdf1" role="presentation">Group 3</Option>
           <Option id="blah-2asdf">test 12</Option>
           <Option id="uhm-3asdf">test 13</Option>
@@ -55,7 +54,7 @@ export default [
           <Option id="anotherasdf">test 15</Option>
           <Option id="andf" disabled>test 16</Option>
         </Menu>,
-        <Menu checkmark multiple id="4">
+        <Menu checkmark id="4">
           <Option id="tesasdfasdt-asdf1" role="presentation">Group 4</Option>
           <Option id="blaasdfasdfadsh-2asdf" asset={<Avatar name="Peter Parker" size="medium" />}>test 17</Option>
           <Option id="uhasdfasdfasm-3asdf" asset={<Avatar name="Bruce Wayne" size="medium" />}>test 18</Option>

@@ -8,12 +8,23 @@ import PropTypes from "prop-types";
 
 export default class OptionBehavior extends Component {
   static propTypes = {
+    children: PropTypes.func,
+    disabled: PropTypes.bool,
+    id: PropTypes.string,
+    getActiveOption: PropTypes.func,
+    getPreviousEvent: PropTypes.func,
+    onClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    role: PropTypes.string,
+    setActiveOption: PropTypes.func,
+    setHighlightIndex: PropTypes.func
     // onChange: PropTypes.func,
     // onKeyUp: PropTypes.func,
     // children: PropTypes.func
   };
 
-  getIndexFromId = (id) => {
+  getIndexFromId = id => {
     const options = this.props.getOptionsInfo();
     const optionIds = []
 
@@ -22,11 +33,11 @@ export default class OptionBehavior extends Component {
     }
 
     return optionIds.indexOf(id)
-  }
+  };
 
   handleClick = event => {
     const currentOption = this.props.id;
-    const multiple = Array.isArray(this.props.getActiveOption()) ? true : false;
+    const multiple = Array.isArray(this.props.getActiveOption());
 
     if (this.props.onClick) {
       this.props.onClick(event);
@@ -53,7 +64,7 @@ export default class OptionBehavior extends Component {
         this.props.setActiveOption(currentOption);
       }
     }
-  }
+  };
 
   handleMouseEnter = event => {
     if (this.props.onMouseEnter) {
@@ -70,10 +81,12 @@ export default class OptionBehavior extends Component {
     }
 
     if (this.props.setHighlightIndex) {
-      this.props.setHighlightIndex(Number(this.getIndexFromId(this.props.id)) + 1);
+      this.props.setHighlightIndex(
+        Number(this.getIndexFromId(this.props.id)) + 1
+      );
       // this.setState({highlightable: false});
     }
-  }
+  };
 
   handleMouseLeave = event => {
     if (this.props.onMouseLeave) {
@@ -88,19 +101,17 @@ export default class OptionBehavior extends Component {
     if (this.props.setHighlightIndex) {
       this.props.setHighlightIndex(0);
     }
-  }
+  };
 
   isActive = () => {
-    const multiple = Array.isArray(this.props.getActiveOption()) ? true : false;
+    const multiple = Array.isArray(this.props.getActiveOption());
 
     if (multiple) {
       return this.props.getActiveOption().indexOf(this.props.id) > -1;
     }
 
-    if (!multiple) {
-      return this.props.id === this.props.getActiveOption();
-    }
-  }
+    return this.props.id === this.props.getActiveOption();
+  };
 
   render() {
     const {

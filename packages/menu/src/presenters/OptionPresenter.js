@@ -47,6 +47,13 @@ export default class OptionPresenter extends Component {
       // onMouseLeave,
       // onMouseUp
     } = otherProps;
+    const payload = otherProps;
+    delete payload.getActiveOption;
+    delete payload.getHighlightIndex;
+    delete payload.getOptionsInfo;
+    delete payload.getPreviousEvent;
+    delete payload.setActiveOption;
+    delete payload.setHighlightIndex;
 
     const ariaPayload = role === `option` ? { "aria-selected": selected } : {};
 
@@ -72,7 +79,7 @@ export default class OptionPresenter extends Component {
           return (
             <li
               // conditional payload for aria-selected
-              {...otherProps}
+              {...payload}
               {...ariaPayload}
               className={css(styles.menuOption)}
               disabled={disabled}

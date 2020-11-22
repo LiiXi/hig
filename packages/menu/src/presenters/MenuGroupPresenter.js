@@ -1,5 +1,5 @@
 import React, { Children, Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { css, cx } from "emotion";
 import { ThemeContext } from "@hig/theme-context";
 import { createCustomClassNames } from "@hig/utils";
@@ -16,7 +16,7 @@ function createMenus(children) {
     const { type, key, props = { index } } = child;
 
     if (type === Menu) {
-    result.push({ key, props });
+      result.push({ key, props });
     }
 
     return result;
@@ -24,6 +24,10 @@ function createMenus(children) {
 }
 
 export default class MenuGroupPresenter extends Component {
+  /* static propTypes = {
+    
+  } */
+
   componentDidMount() {
     // new name needed
     const optionsInfo = {};
@@ -36,11 +40,18 @@ export default class MenuGroupPresenter extends Component {
       // console.log(child.props["role"]);
     });
 
+    Object.keys(optionsInfo).forEach(index => {
+      optionsInfo[index].children.forEach(child => {
+        mergedOptions.push(child.props);
+      });
+    });
+    /* 
     for (const index in optionsInfo) {
       optionsInfo[index].children.forEach(child =>
         mergedOptions.push(child.props))
       ;
     }
+    */
 
     this.props.setOptionsInfo(mergedOptions);
   }

@@ -11,7 +11,7 @@ export default class Option extends Component {
   static propTypes = {
     /**
      * Allows for an asset before the Option text
-     * Can be from @hig/avatars, @hig/icons or
+     * Can be from @hig/avatar, @hig/icons or
      * whatever image of yor choosing
      */
     asset: PropTypes.node,
@@ -20,7 +20,7 @@ export default class Option extends Component {
      */
     children: PropTypes.node.isRequired,
     /**
-     * Disables the Options
+     * Disables the Option
      */
     disabled: PropTypes.bool,
     /**
@@ -59,7 +59,7 @@ export default class Option extends Component {
       onFocus,
       onMouseDown,
       onMouseLeave,
-      onMouseUp,
+      onMouseUp
       // role
     } = otherProps;
 
