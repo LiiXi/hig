@@ -56,6 +56,7 @@ export default class Option extends Component {
       checkmark,
       id, // is this required?
       getHighlightIndex,
+      multiple,
       onFocus,
       onMouseDown,
       onMouseLeave,
@@ -78,7 +79,9 @@ export default class Option extends Component {
           <OptionBehavior
             {...otherProps}
             disabled={disabled}
+            multiple={multiple}
             onMouseLeave={handlePressedMouseLeave}
+            role={role}
           >
             {({
               getIndexFromId,

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import selectOption from "./selectOption";
 
 export default class MenuBehavior extends Component {
   static propTypes = {
@@ -12,7 +13,7 @@ export default class MenuBehavior extends Component {
     handleFocus: PropTypes.func,
     handleKeyDown: PropTypes.func,
     handleMouseMove: PropTypes.func,
-    multiple: PropTypes.func,
+    multiple: PropTypes.bool,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -26,7 +27,7 @@ export default class MenuBehavior extends Component {
    * @type {State}
    */
   state = {
-    activeOption: this.props.multiple ? [] : null,
+    activeOption: [],
     highlightIndex: 0,
     optionInfo: null,
     previousEvent: null
@@ -95,6 +96,8 @@ export default class MenuBehavior extends Component {
       onKeyDown(event);
     }
 
+    // don't let this bubble up
+    event.stopPropagation();
     // Set up options that can be highlighted
     /* for (const index in options) {
       if (!options[index].disabled && options[index].role !== `presentation`) {
@@ -166,7 +169,11 @@ export default class MenuBehavior extends Component {
       // Space
       case 13:
       case 32: {
-        if (multiple) {
+        const activeOptionsArray = this.state.activeOption;
+        const id = this.state.optionInfo[getHighlightIndex() - 1].id;
+        const activeOptions = selectOption(id, activeOptionsArray, multiple);
+        // console.log(activeOptions);
+        /* if (multiple) {
           const activeOptions = this.state.activeOption;
           const currentOption = this.state.optionInfo[getHighlightIndex() - 1]
             .id;
@@ -180,7 +187,10 @@ export default class MenuBehavior extends Component {
         }
         if (!multiple) {
           setActiveOption(this.state.optionInfo[getHighlightIndex() - 1].id);
-        }
+        } */
+
+        setActiveOption(activeOptions);
+        // console.log('called');
         event.preventDefault();
         break;
       }

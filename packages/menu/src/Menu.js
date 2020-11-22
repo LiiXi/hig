@@ -85,6 +85,7 @@ export default class Menu extends Component {
                 getHighlightIndex={getHighlightIndex}
                 getOptionsInfo={getOptionsInfo}
                 getPreviousEvent={getPreviousEvent}
+                multiple={multiple}
                 onBlur={handleMenuBehaviorBlur}
                 onFocus={handleMenuBehaviorFocus}
                 onKeyDown={handleKeyDown}

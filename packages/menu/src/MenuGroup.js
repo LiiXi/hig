@@ -34,25 +34,18 @@ export default class MenuGroup extends Component {
 
   render() {
     const {
-      // checkmark,
       children,
-      // divider,
       multiple,
       onChange,
       stylesheet,
       ...otherProps
     } = this.props;
 
-    /* const {
-      onKeyDown
-    } = otherProps; */
-
     return (
       <MenuBehavior
         {...otherProps}
         multiple={multiple}
         onChange={onChange}
-        // onKeyDown={onKeyDown}
       >
         {({
           getActiveOption,
@@ -73,6 +66,7 @@ export default class MenuGroup extends Component {
             getHighlightIndex={getHighlightIndex}
             getOptionsInfo={getOptionsInfo}
             getPreviousEvent={getPreviousEvent}
+            multiple={multiple}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeyDown}

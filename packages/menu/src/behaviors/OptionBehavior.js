@@ -1,5 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import selectOption from "./selectOption";
 
 /**
  * @typedef {Object} State
@@ -36,34 +37,45 @@ export default class OptionBehavior extends Component {
   };
 
   handleClick = event => {
-    const currentOption = this.props.id;
-    const multiple = Array.isArray(this.props.getActiveOption());
+    const {
+      disabled,
+      getActiveOption,
+      id,
+      multiple,
+      onClick,
+      role,
+      setActiveOption
+    } = this. props;
+    const activeOptionsArray = getActiveOption();
+    const activeOptions = selectOption(id, activeOptionsArray, multiple);
+    // const currentOption = this.props.id;
+    // const multiple = Array.isArray(this.props.getActiveOption());
 
-    if (this.props.onClick) {
-      this.props.onClick(event);
+    if (onClick) {
+      onClick(event);
     }
 
-    if (this.props.disabled || this.props.role === `presentation`) {
+    if (disabled || role === `presentation`) {
       return;
     }
 
-    if (this.props.setActiveOption) {
-      if (multiple) {
-        const activeOptions = this.props.getActiveOption();
 
-        if (activeOptions.indexOf(currentOption) === -1) {
-          activeOptions.push(currentOption);
-        } else {
-          activeOptions.splice(activeOptions.indexOf(currentOption), 1);
-        }
 
-        this.props.setActiveOption(activeOptions);
-      }
+    // if (multiple) {
+    /* const activeOptions = multiple ? getActiveOption() : [];
 
-      if (!multiple) {
-        this.props.setActiveOption(currentOption);
-      }
-    }
+    if (activeOptions.indexOf(currentOption) === -1) {
+      activeOptions.push(currentOption);
+    } else {
+      activeOptions.splice(activeOptions.indexOf(currentOption), 1);
+    } */
+
+    setActiveOption(activeOptions);
+    // }
+
+    /* if (!multiple) {
+      setActiveOption(currentOption);
+    } */
   };
 
   handleMouseEnter = event => {
@@ -104,13 +116,14 @@ export default class OptionBehavior extends Component {
   };
 
   isActive = () => {
-    const multiple = Array.isArray(this.props.getActiveOption());
+    // const multiple = Array.isArray(this.props.getActiveOption());
+    const { id, getActiveOption, multiple } = this.props;
 
     if (multiple) {
-      return this.props.getActiveOption().indexOf(this.props.id) > -1;
+      return getActiveOption().indexOf(id) > -1;
     }
 
-    return this.props.id === this.props.getActiveOption();
+    return id === getActiveOption()[0];
   };
 
   render() {

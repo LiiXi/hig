@@ -59,6 +59,7 @@ export default class MenuPresenter extends Component {
       getHighlightIndex,
       getOptionsInfo,
       getPreviousEvent,
+      multiple,
       onFocus,
       setActiveOption,
       setHighlightIndex
@@ -70,6 +71,7 @@ export default class MenuPresenter extends Component {
       getHighlightIndex,
       getOptionsInfo,
       getPreviousEvent,
+      multiple,
       key,
       onFocus,
       setActiveOption,

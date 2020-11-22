@@ -28,7 +28,7 @@ export default [
     description: "grouped menus",
     getProps: () => ({
       // checkmark: true, icon={<Avatar name="Maria McCaplin" size="medium" />}
-      // multiple: false,
+      multiple: true,
       children: [
         <Menu id="1" divider>
           <Option id="test-1" role="presentation">Group 1</Option>
