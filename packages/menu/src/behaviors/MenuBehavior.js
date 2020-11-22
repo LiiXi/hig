@@ -249,7 +249,7 @@ export default class MenuBehavior extends Component {
     const setPreviousEvent = this.props.setPreviousEvent
       ? this.props.setPreviousEvent
       : this.setPreviousEvent;
-console.log(this.state.activeOption);
+
     return this.props.children({
       getActiveOption,
       getHighlightIndex,

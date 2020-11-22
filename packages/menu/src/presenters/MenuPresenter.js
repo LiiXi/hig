@@ -110,11 +110,14 @@ export default class MenuPresenter extends Component {
     delete payload.getHighlightIndex;
     delete payload.getOptionsInfo;
     delete payload.getPreviousEvent;
+    delete payload.handleBlur;
+    delete payload.handleFocus;
+    delete payload.handleKeyDown;
+    delete payload.handleMouseMove;
     delete payload.setActiveOption;
     delete payload.setHighlightIndex;
     delete payload.setOptionsInfo;
     delete payload.setPreviousEvent;
-
 
     return (
       <ThemeContext.Consumer>
