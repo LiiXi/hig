@@ -13,6 +13,13 @@ export default class MenuGroup extends Component {
      */
     children: PropTypes.node.isRequired,
     /**
+     * Default Selected Option(s)
+     * Should be the HTML id of the Option
+     * This will take precedent over the Menu prop
+     * of the same name
+     */
+    defaultSelected: PropTypes.array,
+    /**
      * Enables multiple selection
      * This will take precedent over the Menu prop
      * of the same name
@@ -39,6 +46,7 @@ export default class MenuGroup extends Component {
   render() {
     const {
       children,
+      defaultSelected,
       multiple,
       onChange,
       stylesheet,
@@ -48,6 +56,7 @@ export default class MenuGroup extends Component {
     return (
       <MenuBehavior
         {...otherProps}
+        defaultSelected={defaultSelected}
         multiple={multiple}
         onChange={onChange}
       >
@@ -67,6 +76,7 @@ export default class MenuGroup extends Component {
         }) => (
           <MenuGroupPresenter
             {...otherProps}
+            defaultSelected={defaultSelected}
             getActiveOption={getActiveOption}
             getHighlightIndex={getHighlightIndex}
             getOptionsInfo={getOptionsInfo}

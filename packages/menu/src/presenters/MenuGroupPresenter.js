@@ -68,6 +68,7 @@ export default class MenuGroupPresenter extends Component {
    */
   renderMenu = ({ key, props }) => {
     const {
+      defaultSelected,
       getActiveOption,
       getHighlightIndex,
       getOptionsInfo,
@@ -84,6 +85,7 @@ export default class MenuGroupPresenter extends Component {
     } = this.props;
     const payload = {
       ...props,
+      defaultSelected,
       key,
       role: "group",
       tabIndex: "-1",

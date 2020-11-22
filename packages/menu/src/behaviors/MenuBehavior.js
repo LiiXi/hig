@@ -5,6 +5,7 @@ import selectOption from "./selectOption";
 export default class MenuBehavior extends Component {
   static propTypes = {
     children: PropTypes.func,
+    defaultSelected: PropTypes.array,
     getActiveOption: PropTypes.func,
     getHighlightIndex: PropTypes.func,
     getOptionsInfo: PropTypes.func,
@@ -27,7 +28,7 @@ export default class MenuBehavior extends Component {
    * @type {State}
    */
   state = {
-    activeOption: [],
+    activeOption: this.props.defaultSelected ? this.props.defaultSelected : [],
     highlightIndex: 0,
     optionInfo: null,
     previousEvent: null
@@ -71,14 +72,13 @@ export default class MenuBehavior extends Component {
     }
 
     event.stopPropagation();
-    console.log('focus');
   };
 
   handleBlur = event => {
     if (this.props.onBlur) {
       this.props.onBlur(event);
     }
-    console.log('blur');
+
     event.stopPropagation();
     this.setHighlightIndex(0);
   };
@@ -249,7 +249,7 @@ export default class MenuBehavior extends Component {
     const setPreviousEvent = this.props.setPreviousEvent
       ? this.props.setPreviousEvent
       : this.setPreviousEvent;
-
+console.log(this.state.activeOption);
     return this.props.children({
       getActiveOption,
       getHighlightIndex,

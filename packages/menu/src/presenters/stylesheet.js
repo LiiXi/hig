@@ -40,10 +40,10 @@ export default function stylesheet(props, themeData) {
       padding: `${themeData["menu.item.paddingVertical"]}
         ${themeData["menu.item.paddingHorizontal"]}`,
       transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`,
-      ...(selected
+      ...(selected && !disabled
         ? { fontWeight: themeData[`menu.label.selected.fontWeight`] }
         : { fontWeight: themeData[`menu.label.default.fontWeight`] }),
-      ...(highlighted
+      ...(highlighted && !disabled
         ? { 
           backgroundColor: themeData[`menu.item.hover.backgroundColor`],
           transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`
@@ -70,14 +70,14 @@ export default function stylesheet(props, themeData) {
       "& > svg > *": {
         opacity: 0,
         transition: `opacity 0.3s cubic-bezier(0.4,0,0.2,1)`,
-        ...(highlighted
+        ...(highlighted && !disabled
           ? {
               fill: themeData[`menu.item.checkmark.hover.iconColor`],
               opacity: 1,
               transition: `opacity 0.3s cubic-bezier(0.4,0,0.2,1)`
             }
           : {}),
-        ...(selected
+        ...(selected && !disabled
           ? {
               fill: themeData[`menu.item.checkmark.active.iconColor`],
               opacity: 1,

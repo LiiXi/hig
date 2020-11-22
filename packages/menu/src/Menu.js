@@ -16,6 +16,11 @@ export default class Menu extends Component {
      */
     children: PropTypes.node.isRequired,
     /**
+     * Default Selected Option(s)
+     * Should be the HTML id of the Option
+     */
+    defaultSelected: PropTypes.array,
+    /**
      * Shows a divider at the bottom of the menu
      */
     divider: PropTypes.bool,
@@ -39,11 +44,12 @@ export default class Menu extends Component {
 
   render() {
     const {
-      onChange,
       checkmark,
       children,
+      defaultSelected,
       divider,
       multiple,
+      onChange,
       stylesheet,
       ...otherProps
     } = this.props;
@@ -57,6 +63,7 @@ export default class Menu extends Component {
         {({ hasFocus, onBlur: handleBlur, onFocus: handleFocus }) => (
           <MenuBehavior
             {...otherProps}
+            defaultSelected={defaultSelected}
             hasFocus={hasFocus}
             multiple={multiple}
             onBlur={handleBlur}
