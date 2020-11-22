@@ -3,7 +3,8 @@ function getRulesByPresentation(themeData) {
     fontSize: themeData[`menu.header.fontSize`],
     color: themeData[`menu.header.fontColor`],
     opacity: 0.5,
-    textTransform: `uppercase`
+    textTransform: `uppercase`,
+    cursor: `default`
   };
 }
 
@@ -38,14 +39,21 @@ export default function stylesheet(props, themeData) {
       minHeight: themeData[`menu.item.minHeight`],
       padding: `${themeData["menu.item.paddingVertical"]}
         ${themeData["menu.item.paddingHorizontal"]}`,
+      transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`,
       ...(selected
         ? { fontWeight: themeData[`menu.label.selected.fontWeight`] }
         : { fontWeight: themeData[`menu.label.default.fontWeight`] }),
       ...(highlighted
-        ? { backgroundColor: themeData[`menu.item.hover.backgroundColor`] }
+        ? { 
+          backgroundColor: themeData[`menu.item.hover.backgroundColor`],
+          transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`
+          }
         : {}),
       ...(isPressed && (!disabled && role !== `presentation`)
-        ? { backgroundColor: themeData[`menu.item.pressed.backgroundColor`] }
+        ? {
+            backgroundColor: themeData[`menu.item.pressed.backgroundColor`],
+            transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`,
+          }
         : {}),
       ...(disabled
         ? { opacity: themeData[`colorScheme.opacity.disabled`] }
@@ -61,16 +69,19 @@ export default function stylesheet(props, themeData) {
       marginRight: themeData[`menu.item.paddingHorizontal`],
       "& > svg > *": {
         opacity: 0,
+        transition: `opacity 0.3s cubic-bezier(0.4,0,0.2,1)`,
         ...(highlighted
           ? {
               fill: themeData[`menu.item.checkmark.hover.iconColor`],
-              opacity: 1
+              opacity: 1,
+              transition: `opacity 0.3s cubic-bezier(0.4,0,0.2,1)`
             }
           : {}),
         ...(selected
           ? {
               fill: themeData[`menu.item.checkmark.active.iconColor`],
-              opacity: 1
+              opacity: 1,
+              transition: `opacity 0.3s cubic-bezier(0.4,0,0.2,1)`
             }
           : {})
       }
