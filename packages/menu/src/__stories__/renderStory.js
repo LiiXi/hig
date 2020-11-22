@@ -5,8 +5,8 @@ import Menu, { MenuGroup } from "../index";
 import getKnobs from "./getKnobs";
 
 export default function renderStory(props, component) {
-  const { children, theme, ...otherProps } = getKnobs(props);
   const HIGComponent = component === `Menu` ? Menu : MenuGroup;
+  const { children, theme, ...otherProps } = getKnobs(props, HIGComponent);
 
   return (
     <KnobbedThemeProvider>
