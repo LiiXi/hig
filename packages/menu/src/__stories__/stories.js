@@ -9,6 +9,8 @@ export default [
     getProps: () => ({
       multiple: true,
       checkmark: true,
+      selected: ["uhm-3", "another one"],
+      defaultSelected: ["blah-2"],
       children: [
         <Option
           id="test-1"
@@ -29,6 +31,7 @@ export default [
     getProps: () => ({
       // checkmark: true, icon={<Avatar name="Maria McCaplin" size="medium" />}
       multiple: true,
+      selected: ["uhm-3", "anotherone", "blah-2dddd"],
       children: [
         <Menu id="1" divider>
           <Option id="test-1" role="presentation">Group 1</Option>
@@ -38,7 +41,7 @@ export default [
           <Option id="anotherone">test 5</Option>
           <Option id="another" disabled>test 6</Option>
         </Menu>,
-        <Menu id="3" divider>
+        <Menu id="3" divider selected={["blah-2dddd"]}>
           <Option id="test-1dddd" role="presentation">Group 2</Option>
           <Option id="blah-2dddd" asset={<AddFolder24 />} shortcut={<span>&#8984; 5</span>}>test 7</Option>
           <Option id="uhm-3ddddd" asset={<AddMember24 />} shortcut={<span>&#8984; 6</span>}>test 8</Option>

@@ -33,6 +33,12 @@ export default class Menu extends Component {
      */
     onChange: PropTypes.func,
     /**
+     * Controls the selected Option(s)
+     * This will not work if this is the child
+     * of a MenuGroup component
+     */
+    selected: PropTypes.array,
+    /**
      * Adds custom/overriding styles
      */
     stylesheet: PropTypes.func
@@ -50,6 +56,7 @@ export default class Menu extends Component {
       divider,
       multiple,
       onChange,
+      selected,
       stylesheet,
       ...otherProps
     } = this.props;
@@ -70,6 +77,7 @@ export default class Menu extends Component {
             onChange={onChange}
             onFocus={handleFocus}
             onKeyDown={onKeyDown}
+            selected={selected}
           >
             {({
               getActiveOption,
@@ -98,6 +106,7 @@ export default class Menu extends Component {
                 onFocus={handleMenuBehaviorFocus}
                 onKeyDown={handleKeyDown}
                 onMouseMove={handleMouseMove}
+                selected={selected}
                 setActiveOption={setActiveOption}
                 setHighlightIndex={setHighlightIndex}
                 setOptionsInfo={setOptionsInfo}

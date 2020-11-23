@@ -24,19 +24,27 @@ export default class MenuBehavior extends Component {
     setPreviousEvent: PropTypes.func
   };
 
+  static defaultProps = {
+    defaultSelected: []
+  };
+
   /**
    * @type {State}
    */
   state = {
-    activeOption: this.props.defaultSelected ? this.props.defaultSelected : [],
+    activeOption: this.isControlled() ? this.props.selected : this.props.defaultSelected,
     highlightIndex: 0,
     optionInfo: null,
     previousEvent: null
   };
 
+  isControlled() {
+    return this.props.selected !== undefined;
+  };
+
   setOptionsInfo = optionInfo => {
     this.setState({ optionInfo });
-  }
+  };
 
   getOptionsInfo = () => this.state.optionInfo;
 
@@ -173,7 +181,7 @@ export default class MenuBehavior extends Component {
       // Space
       case 13:
       case 32: {
-        const activeOptionsArray = this.state.activeOption;
+        const activeOptionsArray = [...this.state.activeOption];
         const id = this.state.optionInfo[getHighlightIndex() - 1].id;
         const activeOptions = selectOption(id, activeOptionsArray, multiple);
         // console.log(activeOptions);
@@ -192,6 +200,9 @@ export default class MenuBehavior extends Component {
         if (!multiple) {
           setActiveOption(this.state.optionInfo[getHighlightIndex() - 1].id);
         } */
+        if (this.isControlled()) {
+          return;
+        }
 
         setActiveOption(activeOptions);
         // console.log('called');

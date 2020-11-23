@@ -32,6 +32,12 @@ export default class MenuGroup extends Component {
      */
     onChange: PropTypes.func,
     /**
+     * Controls the selected Option(s)
+     * This will take precedent over the Menu prop of the
+     * same name
+     */
+    selected: PropTypes.array,
+    /**
      * Adds custom/overriding styles
      * This will take precedent over the Menu prop of the
      * same name
@@ -49,6 +55,7 @@ export default class MenuGroup extends Component {
       defaultSelected,
       multiple,
       onChange,
+      selected,
       stylesheet,
       ...otherProps
     } = this.props;
@@ -59,6 +66,7 @@ export default class MenuGroup extends Component {
         defaultSelected={defaultSelected}
         multiple={multiple}
         onChange={onChange}
+        selected={selected}
       >
         {({
           getActiveOption,
@@ -86,6 +94,7 @@ export default class MenuGroup extends Component {
             onFocus={handleFocus}
             onKeyDown={handleKeyDown}
             onMouseMove={handleMouseMove}
+            selected={selected}
             setActiveOption={setActiveOption}
             setHighlightIndex={setHighlightIndex}
             setOptionsInfo={setOptionsInfo}

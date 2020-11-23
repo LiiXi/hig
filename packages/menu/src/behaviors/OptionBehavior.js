@@ -20,9 +20,6 @@ export default class OptionBehavior extends Component {
     role: PropTypes.string,
     setActiveOption: PropTypes.func,
     setHighlightIndex: PropTypes.func
-    // onChange: PropTypes.func,
-    // onKeyUp: PropTypes.func,
-    // children: PropTypes.func
   };
 
   getIndexFromId = id => {
@@ -44,9 +41,10 @@ export default class OptionBehavior extends Component {
       multiple,
       onClick,
       role,
+      selected,
       setActiveOption
-    } = this. props;
-    const activeOptionsArray = getActiveOption();
+    } = this.props;
+    const activeOptionsArray = [...getActiveOption()];
     const activeOptions = selectOption(id, activeOptionsArray, multiple);
     // const currentOption = this.props.id;
     // const multiple = Array.isArray(this.props.getActiveOption());
@@ -56,6 +54,10 @@ export default class OptionBehavior extends Component {
     }
 
     if (disabled || role === `presentation`) {
+      return;
+    }
+
+    if (selected !== undefined) {
       return;
     }
 
