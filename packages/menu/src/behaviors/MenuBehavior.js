@@ -217,7 +217,7 @@ export default class MenuBehavior extends Component {
       case 13:
       case 32: {
         const activeOptionsArray = [...this.state.activeOption];
-        const id = this.state.optionInfo[getHighlightIndex() - 1].id;
+        const { id } = this.state.optionInfo[getHighlightIndex() - 1];
         const activeOptions = selectOption(id, activeOptionsArray, multiple);
         // console.log(activeOptions);
         /* if (multiple) {

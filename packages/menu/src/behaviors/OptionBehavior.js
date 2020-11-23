@@ -29,9 +29,15 @@ export default class OptionBehavior extends Component {
     const options = this.props.getOptionsInfo();
     const optionIds = [];
 
-    for (const index in options) {
-      optionIds.push(options[index].id);
+    if (options !== null) {
+      Object.keys(options).forEach(index => {
+        optionIds.push(options[index].id);
+      });
     }
+
+    /* for (const index in options) {
+      optionIds.push(options[index].id);
+    } */
 
     return optionIds.indexOf(id);
   };
