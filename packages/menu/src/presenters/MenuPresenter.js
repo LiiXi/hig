@@ -29,10 +29,6 @@ export default class MenuPresenter extends Component {
     stylesheet: PropTypes.func
   };
 
-  static defaultProps = {
-    
-  };
-
   componentDidMount() {
     const optionsInfo = {};
     React.Children.forEach(this.props.children, (child, index) => {
@@ -109,7 +105,7 @@ export default class MenuPresenter extends Component {
       tabIndex
     } = otherProps;
 
-    const payload = {...otherProps};
+    const payload = { ...otherProps };
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
     delete payload.getOptionsInfo;

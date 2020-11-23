@@ -126,8 +126,11 @@ export default class MenuGroupPresenter extends Component {
 
     return (
       <ThemeContext.Consumer>
-        {({ resolvedRoles, metadata }) => {
-          const styles = stylesheet({ stylesheet: customStylesheet }, resolvedRoles);
+        {({ resolvedRoles }) => {
+          const styles = stylesheet(
+            { stylesheet: customStylesheet },
+            resolvedRoles
+          );
 
           return (
             <div

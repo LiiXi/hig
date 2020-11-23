@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-// import { ThemeContext } from "@hig/theme-context";
-import { createCustomClassNames } from "@hig/utils";
 
 import MenuBehavior from "./behaviors/MenuBehavior";
 import MenuGroupPresenter from "./presenters/MenuGroupPresenter";
@@ -18,7 +16,7 @@ export default class MenuGroup extends Component {
      * This will take precedent over the Menu prop
      * of the same name
      */
-    defaultSelected: PropTypes.array,
+    defaultSelected: PropTypes.arrayOf(PropTypes.any),
     /**
      * Enables multiple selection
      * This will take precedent over the Menu prop
@@ -36,7 +34,7 @@ export default class MenuGroup extends Component {
      * This will take precedent over the Menu prop of the
      * same name
      */
-    selected: PropTypes.array,
+    selected: PropTypes.arrayOf(PropTypes.any),
     /**
      * Adds custom/overriding styles
      * This will take precedent over the Menu prop of the

@@ -2,30 +2,33 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import selectOption from "./selectOption";
 
-
 function checkScroll(optionId) {
   const option = document.getElementById(optionId);
   const optionBounding = option.getBoundingClientRect();
 
   if (
     optionBounding.top < 0 ||
-    optionBounding.bottom > (window.innerHeight || document.documentElement.clientHeight)
+    optionBounding.bottom >
+      (window.innerHeight || document.documentElement.clientHeight)
   ) {
     // align to the top if the top of Option is out of the viewport
     if (optionBounding.top < 0) {
       option.scrollIntoView(true);
     }
     // align to the bottom if the bottom of Option is out of the viewport
-    if (optionBounding.bottom > (window.innerHeight || document.documentElement.clientHeight)) {
+    if (
+      optionBounding.bottom >
+      (window.innerHeight || document.documentElement.clientHeight)
+    ) {
       option.scrollIntoView(false);
     }
   }
-};
+}
 
 export default class MenuBehavior extends Component {
   static propTypes = {
     children: PropTypes.func,
-    defaultSelected: PropTypes.array,
+    defaultSelected: PropTypes.arrayOf(PropTypes.any),
     getActiveOption: PropTypes.func,
     getHighlightIndex: PropTypes.func,
     getOptionsInfo: PropTypes.func,
@@ -38,6 +41,8 @@ export default class MenuBehavior extends Component {
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    selected: PropTypes.arrayOf(PropTypes.any),
     setActiveOption: PropTypes.func,
     setHighlightIndex: PropTypes.func,
     setOptionsInfo: PropTypes.func,
@@ -52,14 +57,12 @@ export default class MenuBehavior extends Component {
    * @type {State}
    */
   state = {
-    activeOption: this.isControlled() ? this.props.selected : this.props.defaultSelected,
+    activeOption: this.isControlled()
+      ? this.props.selected
+      : this.props.defaultSelected,
     highlightIndex: 0,
     optionInfo: null,
     previousEvent: null
-  };
-
-  isControlled() {
-    return this.props.selected !== undefined;
   };
 
   setOptionsInfo = optionInfo => {
@@ -94,6 +97,10 @@ export default class MenuBehavior extends Component {
 
   getTotalOptions = () => Object.keys(this.state.optionInfo).length;
 
+  isControlled() {
+    return this.props.selected !== undefined;
+  }
+
   handleFocus = event => {
     if (this.props.onFocus) {
       this.props.onFocus(event);
@@ -115,12 +122,11 @@ export default class MenuBehavior extends Component {
     const {
       getHighlightIndex,
       getOptionsInfo,
-      props,
       setActiveOption,
       setHighlightIndex,
       setPreviousEvent
     } = this;
-    const { multiple, onKeyDown } = props;
+    const { multiple, onKeyDown } = this.props;
     const options = this.state.optionInfo;
     const highlightableIndexes = [];
 
@@ -151,7 +157,6 @@ export default class MenuBehavior extends Component {
         const currentIndex = highlightableIndexes.indexOf(getHighlightIndex());
         const lastIndex = highlightableIndexes.length - 1;
 
-        
         if (currentIndex === lastIndex) {
           setHighlightIndex(highlightableIndexes[0]);
           // scrollintoview
@@ -170,7 +175,9 @@ export default class MenuBehavior extends Component {
             )
             .scrollIntoView(false); */
 
-          checkScroll(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id);
+          checkScroll(
+            getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id
+          );
         }
 
         event.preventDefault();
@@ -197,7 +204,9 @@ export default class MenuBehavior extends Component {
               getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id
             )
             .scrollIntoView(false); */
-          checkScroll(getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id);
+          checkScroll(
+            getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id
+          );
         }
         event.preventDefault();
         break;
@@ -236,9 +245,7 @@ export default class MenuBehavior extends Component {
         break;
       }
 
-      default: {
-        return;
-      }
+      default:
     }
   };
 

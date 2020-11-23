@@ -19,7 +19,7 @@ export default class Menu extends Component {
      * Default Selected Option(s)
      * Should be the HTML id of the Option
      */
-    defaultSelected: PropTypes.array,
+    defaultSelected: PropTypes.arrayOf(PropTypes.any),
     /**
      * Shows a divider at the bottom of the menu
      */
@@ -37,7 +37,7 @@ export default class Menu extends Component {
      * This will not work if this is the child
      * of a MenuGroup component
      */
-    selected: PropTypes.array,
+    selected: PropTypes.arrayOf(PropTypes.any),
     /**
      * Adds custom/overriding styles
      */

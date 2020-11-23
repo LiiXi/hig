@@ -49,22 +49,22 @@ export default function stylesheet(props, themeData) {
         ? { fontWeight: themeData[`menu.label.selected.fontWeight`] }
         : { fontWeight: themeData[`menu.label.default.fontWeight`] }),
       ...(highlighted && !disabled
-        ? { 
-          backgroundColor: themeData[`menu.item.hover.backgroundColor`],
-          transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`
+        ? {
+            backgroundColor: themeData[`menu.item.hover.backgroundColor`],
+            transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`
           }
         : {}),
       ...(isPressed && (!disabled && role !== `presentation`)
         ? {
             backgroundColor: themeData[`menu.item.pressed.backgroundColor`],
-            transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`,
+            transition: `background-color 0.3s cubic-bezier(0.4,0,0.2,1)`
           }
         : {}),
       ...(disabled
         ? {
-          opacity: themeData[`colorScheme.opacity.disabled`],
-          cursor: `not-allowed`
-        }
+            opacity: themeData[`colorScheme.opacity.disabled`],
+            cursor: `not-allowed`
+          }
         : {}),
       ...(role === `presentation` ? getRulesByPresentation(themeData) : {})
     },

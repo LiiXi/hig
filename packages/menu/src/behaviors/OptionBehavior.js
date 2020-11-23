@@ -13,24 +13,27 @@ export default class OptionBehavior extends Component {
     disabled: PropTypes.bool,
     id: PropTypes.string,
     getActiveOption: PropTypes.func,
+    getOptionsInfo: PropTypes.func,
     getPreviousEvent: PropTypes.func,
+    multiple: PropTypes.bool,
     onClick: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     role: PropTypes.string,
+    selected: PropTypes.arrayOf(PropTypes.any),
     setActiveOption: PropTypes.func,
     setHighlightIndex: PropTypes.func
   };
 
   getIndexFromId = id => {
     const options = this.props.getOptionsInfo();
-    const optionIds = []
+    const optionIds = [];
 
     for (const index in options) {
       optionIds.push(options[index].id);
     }
 
-    return optionIds.indexOf(id)
+    return optionIds.indexOf(id);
   };
 
   handleClick = event => {
@@ -60,8 +63,6 @@ export default class OptionBehavior extends Component {
     if (selected !== undefined) {
       return;
     }
-
-
 
     // if (multiple) {
     /* const activeOptions = multiple ? getActiveOption() : [];

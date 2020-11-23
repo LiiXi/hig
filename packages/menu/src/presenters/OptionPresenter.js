@@ -36,16 +36,28 @@ export default class OptionPresenter extends Component {
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
-    const {
+    const { className, id } = otherProps;
+    const menuOptionClassName = createCustomClassNames(
       className,
-      id
-    } = otherProps;
-    const menuOptionClassName = createCustomClassNames(className, "menu-option");
-    const checkmarkWrapperClassName = createCustomClassNames(className, "checkmark-wrapper");
-    const assetWrapperClassName = createCustomClassNames(className, "asset-wrapper");
-    const optionContentWrapperClassName = createCustomClassNames(className, "option-content-wrapper");
-    const shortcutWrapperClassName = createCustomClassNames(className, "shortcut-wrapper");
-    const payload = {...otherProps};
+      "menu-option"
+    );
+    const checkmarkWrapperClassName = createCustomClassNames(
+      className,
+      "checkmark-wrapper"
+    );
+    const assetWrapperClassName = createCustomClassNames(
+      className,
+      "asset-wrapper"
+    );
+    const optionContentWrapperClassName = createCustomClassNames(
+      className,
+      "option-content-wrapper"
+    );
+    const shortcutWrapperClassName = createCustomClassNames(
+      className,
+      "shortcut-wrapper"
+    );
+    const payload = { ...otherProps };
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
     delete payload.getOptionsInfo;
@@ -86,17 +98,39 @@ export default class OptionPresenter extends Component {
               selected={selected}
             >
               {checkmark && role !== `presentation` ? (
-                <div className={cx([checkmarkWrapperClassName, css(styles.checkmarkWrapper)])}>
+                <div
+                  className={cx([
+                    checkmarkWrapperClassName,
+                    css(styles.checkmarkWrapper)
+                  ])}
+                >
                   <Checkmark />
                 </div>
               ) : null}
               {asset ? (
-                <div className={cx([assetWrapperClassName, css(styles.assetWrapper)])}>{asset}</div>
+                <div
+                  className={cx([
+                    assetWrapperClassName,
+                    css(styles.assetWrapper)
+                  ])}
+                >
+                  {asset}
+                </div>
               ) : null}
-              <div className={cx([optionContentWrapperClassName, css(styles.optionContentWrapper)])}>
+              <div
+                className={cx([
+                  optionContentWrapperClassName,
+                  css(styles.optionContentWrapper)
+                ])}
+              >
                 {children}
                 {shortcut ? (
-                  <span className={cx([shortcutWrapperClassName, css(styles.shortcutWrapper)])}>
+                  <span
+                    className={cx([
+                      shortcutWrapperClassName,
+                      css(styles.shortcutWrapper)
+                    ])}
+                  >
                     {shortcut}
                   </span>
                 ) : null}
