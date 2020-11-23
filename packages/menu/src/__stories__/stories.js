@@ -7,6 +7,7 @@ export default [
   {
     description: "default",
     getProps: () => ({
+      className: "test blah",
       multiple: true,
       checkmark: true,
       children: [
@@ -16,7 +17,7 @@ export default [
         >
           test 1
         </Option>,
-        <Option id="blah-2" onClick={event => console.log(event.target)}>test 2</Option>,
+        <Option id="blah-2" className="option tester" onClick={event => console.log(event.target)}>test 2</Option>,
         <Option id="uhm-3">test 3</Option>,
         <Option id="blahasdf" disabled>test 4</Option>,
         <Option id="another one">test 5</Option>,
@@ -29,8 +30,9 @@ export default [
     getProps: () => ({
       // checkmark: true, icon={<Avatar name="Maria McCaplin" size="medium" />}
       multiple: true,
+      className: "menuGroup another",
       children: [
-        <Menu id="1" divider>
+        <Menu id="1" divider className="test">
           <Option id="test-1" role="presentation">Group 1</Option>
           <Option id="blah-2">test 2</Option>
           <Option id="uhm-3">test 3</Option>

@@ -40,6 +40,11 @@ export default class OptionPresenter extends Component {
       className,
       id
     } = otherProps;
+    const menuOptionClassName = createCustomClassNames(className, "menu-option");
+    const checkmarkWrapperClassName = createCustomClassNames(className, "checkmark-wrapper");
+    const assetWrapperClassName = createCustomClassNames(className, "asset-wrapper");
+    const optionContentWrapperClassName = createCustomClassNames(className, "option-content-wrapper");
+    const shortcutWrapperClassName = createCustomClassNames(className, "shortcut-wrapper");
     const payload = {...otherProps};
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
@@ -74,24 +79,24 @@ export default class OptionPresenter extends Component {
               // conditional payload for aria-selected
               {...payload}
               {...ariaPayload}
-              className={css(styles.menuOption)}
+              className={cx([menuOptionClassName, css(styles.menuOption)])}
               disabled={disabled}
               id={id}
               role={role}
               selected={selected}
             >
               {checkmark && role !== `presentation` ? (
-                <div className={css(styles.checkmarkWrapper)}>
+                <div className={cx([checkmarkWrapperClassName, css(styles.checkmarkWrapper)])}>
                   <Checkmark />
                 </div>
               ) : null}
               {asset ? (
-                <div className={css(styles.assetWrapper)}>{asset}</div>
+                <div className={cx([assetWrapperClassName, css(styles.assetWrapper)])}>{asset}</div>
               ) : null}
-              <div className={css(styles.optionContentWrapper)}>
+              <div className={cx([optionContentWrapperClassName, css(styles.optionContentWrapper)])}>
                 {children}
                 {shortcut ? (
-                  <span className={css(styles.shortcutWrapper)}>
+                  <span className={cx([shortcutWrapperClassName, css(styles.shortcutWrapper)])}>
                     {shortcut}
                   </span>
                 ) : null}

@@ -2,7 +2,6 @@ import React, { Children, Component } from "react";
 // import PropTypes from "prop-types";
 import { css, cx } from "emotion";
 import { ThemeContext } from "@hig/theme-context";
-import { createCustomClassNames } from "@hig/utils";
 
 import Menu from "../Menu";
 import stylesheet from "./stylesheet";
@@ -133,7 +132,7 @@ export default class MenuGroupPresenter extends Component {
           return (
             <div
               {...otherProps}
-              className={css(styles.menuGroup)}
+              className={cx([className, css(styles.menuGroup)])}
               ref={menuGroupRef}
               role="listbox" // conditional or required
               tabIndex="0" // conditional w/ MenuGroup

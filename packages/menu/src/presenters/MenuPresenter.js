@@ -1,8 +1,7 @@
 import React, { Children, Component } from "react";
 import PropTypes from "prop-types";
-import { cx, css } from "emotion";
+import { css, cx } from "emotion";
 import { ThemeContext } from "@hig/theme-context";
-import { createCustomClassNames } from "@hig/utils";
 
 import Option from "../Option";
 import stylesheet from "./stylesheet";
@@ -101,6 +100,7 @@ export default class MenuPresenter extends Component {
     } = this.props;
     const {
       id,
+      className,
       // onBlur,
       // onFocus,
       // onKeyDown,
@@ -108,6 +108,7 @@ export default class MenuPresenter extends Component {
       role,
       tabIndex
     } = otherProps;
+
     const payload = {...otherProps};
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
@@ -136,7 +137,7 @@ export default class MenuPresenter extends Component {
           return (
             <ul
               {...payload}
-              className={css(styles.menu)}
+              className={cx([className, css(styles.menu)])}
               id={id}
               ref={menuRef}
               // onBlur={onBlur}
