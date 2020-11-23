@@ -2,6 +2,22 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import selectOption from "./selectOption";
 
+
+function checkScroll(optionId) {
+  const option = document.getElementById(optionId);
+  const optionBounding = option.getBoundingClientRect();
+
+  if (
+    optionBounding.top >= 0 &&
+    optionBounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+  ) {
+    console.log("in the viewport");
+  } else {
+    console.log('Not in the viewport... whomp whomp');
+    option.scrollIntoView(false);
+  }
+};
+
 export default class MenuBehavior extends Component {
   static propTypes = {
     children: PropTypes.func,
@@ -108,7 +124,7 @@ export default class MenuBehavior extends Component {
       onKeyDown(event);
     }
 
-    // don't let this bubble up
+    // don't let this bubble up and trigger twice if this is within a MenuGroup component
     event.stopPropagation();
     // Set up options that can be highlighted
     /* for (const index in options) {
@@ -131,22 +147,26 @@ export default class MenuBehavior extends Component {
         const currentIndex = highlightableIndexes.indexOf(getHighlightIndex());
         const lastIndex = highlightableIndexes.length - 1;
 
+        
         if (currentIndex === lastIndex) {
           setHighlightIndex(highlightableIndexes[0]);
+          // scrollintoview
+          /* 
           document
             .getElementById(getOptionsInfo()[highlightableIndexes[0] - 1].id)
-            .scrollIntoView(false);
+            .scrollIntoView(false); */
+
+          checkScroll(getOptionsInfo()[highlightableIndexes[0] - 1].id);
         } else {
           setHighlightIndex(highlightableIndexes[currentIndex + 1]);
-          document
+          // scrollintoviews
+          /* document
             .getElementById(
               getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id
             )
-            .scrollIntoView(false);
+            .scrollIntoView(false); */
 
-          // beginning to check if in viewport
-          console.log(document.getElementById(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id).getBoundingClientRect().top);
-          console.log(window.innerHeight);
+          checkScroll(getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id);
         }
 
         event.preventDefault();
@@ -160,18 +180,20 @@ export default class MenuBehavior extends Component {
 
         if (currentIndex <= 0) {
           setHighlightIndex(highlightableIndexes[lastIndex]);
-          document
+          /* document
             .getElementById(
               getOptionsInfo()[highlightableIndexes[lastIndex] - 1].id
             )
-            .scrollIntoView(false);
+            .scrollIntoView(false); */
+          checkScroll(getOptionsInfo()[highlightableIndexes[lastIndex] - 1].id);
         } else {
           setHighlightIndex(highlightableIndexes[currentIndex - 1]);
-          document
+          /* document
             .getElementById(
               getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id
             )
-            .scrollIntoView(false);
+            .scrollIntoView(false); */
+          checkScroll(getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id);
         }
         event.preventDefault();
         break;
@@ -208,6 +230,10 @@ export default class MenuBehavior extends Component {
         // console.log('called');
         event.preventDefault();
         break;
+      }
+
+      default: {
+        return;
       }
     }
   };

@@ -108,7 +108,7 @@ export default class MenuPresenter extends Component {
       role,
       tabIndex
     } = otherProps;
-    const payload = otherProps;
+    const payload = {...otherProps};
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
     delete payload.getOptionsInfo;

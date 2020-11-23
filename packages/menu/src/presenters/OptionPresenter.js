@@ -39,15 +39,8 @@ export default class OptionPresenter extends Component {
     const {
       className,
       id
-      // onBlur,
-      // onClick,
-      // onFocus,
-      // onMouseDown,
-      // onMouseEnter,
-      // onMouseLeave,
-      // onMouseUp
     } = otherProps;
-    const payload = otherProps;
+    const payload = {...otherProps};
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
     delete payload.getOptionsInfo;
@@ -85,13 +78,6 @@ export default class OptionPresenter extends Component {
               disabled={disabled}
               id={id}
               role={role}
-              // onBlur={onBlur}
-              // onClick={onClick}
-              // onFocus={onFocus}
-              // onMouseDown={onMouseDown}
-              // onMouseEnter={onMouseEnter}
-              // onMouseLeave={onMouseLeave}
-              // onMouseUp={onMouseUp}
               selected={selected}
             >
               {checkmark && role !== `presentation` ? (
