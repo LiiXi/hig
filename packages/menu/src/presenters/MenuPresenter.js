@@ -95,6 +95,7 @@ export default class MenuPresenter extends Component {
       checkmark,
       children,
       divider,
+      menuRef,
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
@@ -137,6 +138,7 @@ export default class MenuPresenter extends Component {
               {...payload}
               className={css(styles.menu)}
               id={id}
+              ref={menuRef}
               // onBlur={onBlur}
               // onFocus={onFocus}
               // onKeyDown={onKeyDown}

@@ -119,6 +119,7 @@ export default class MenuGroupPresenter extends Component {
   render() {
     const {
       // children,
+      menuGroupRef,
       ...otherProps
     } = this.props;
 
@@ -136,6 +137,7 @@ export default class MenuGroupPresenter extends Component {
               // onBlur={this.handleBlur}
               // onFocus={this.handleFocus}
               // onKeyDown={this.handleKeyDown}
+              ref={menuGroupRef}
               role="listbox" // conditional or required
               tabIndex="0" // conditional w/ MenuGroup
             >

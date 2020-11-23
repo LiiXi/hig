@@ -54,6 +54,7 @@ export default class Menu extends Component {
       children,
       defaultSelected,
       divider,
+      menuRef,
       multiple,
       onChange,
       selected,
@@ -101,6 +102,7 @@ export default class Menu extends Component {
                 getHighlightIndex={getHighlightIndex}
                 getOptionsInfo={getOptionsInfo}
                 getPreviousEvent={getPreviousEvent}
+                menuRef={menuRef}
                 multiple={multiple}
                 onBlur={handleMenuBehaviorBlur}
                 onFocus={handleMenuBehaviorFocus}

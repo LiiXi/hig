@@ -53,6 +53,7 @@ export default class MenuGroup extends Component {
     const {
       children,
       defaultSelected,
+      menuGroupRef,
       multiple,
       onChange,
       selected,
@@ -89,6 +90,7 @@ export default class MenuGroup extends Component {
             getHighlightIndex={getHighlightIndex}
             getOptionsInfo={getOptionsInfo}
             getPreviousEvent={getPreviousEvent}
+            menuGroupRef={menuGroupRef}
             multiple={multiple}
             onBlur={handleBlur}
             onFocus={handleFocus}
