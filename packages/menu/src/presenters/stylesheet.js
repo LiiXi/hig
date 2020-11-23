@@ -19,6 +19,10 @@ export default function stylesheet(props, themeData) {
     stylesheet: customStylesheet
   } = props;
   const styles = {
+    menuGroup: {
+      overflowY: `auto`,
+      outline: 0
+    },
     menu: {
       borderBottom: divider
         ? `1px solid ${themeData[`menu.divider.backgroundColor`]}`
@@ -29,7 +33,8 @@ export default function stylesheet(props, themeData) {
       listStyle: `none`,
       margin: 0,
       outline: 0,
-      padding: `${themeData["menu.container.paddingVertical"]} 0`
+      padding: `${themeData["menu.container.paddingVertical"]} 0`,
+      overflowY: `auto`
     },
     menuOption: {
       display: `flex`,
@@ -56,7 +61,10 @@ export default function stylesheet(props, themeData) {
           }
         : {}),
       ...(disabled
-        ? { opacity: themeData[`colorScheme.opacity.disabled`] }
+        ? {
+          opacity: themeData[`colorScheme.opacity.disabled`],
+          cursor: `not-allowed`
+        }
         : {}),
       ...(role === `presentation` ? getRulesByPresentation(themeData) : {})
     },

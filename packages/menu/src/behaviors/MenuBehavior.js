@@ -8,13 +8,17 @@ function checkScroll(optionId) {
   const optionBounding = option.getBoundingClientRect();
 
   if (
-    optionBounding.top >= 0 &&
-    optionBounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    optionBounding.top < 0 ||
+    optionBounding.bottom > (window.innerHeight || document.documentElement.clientHeight)
   ) {
-    console.log("in the viewport");
-  } else {
-    console.log('Not in the viewport... whomp whomp');
-    option.scrollIntoView(false);
+    // align to the top if the top of Option is out of the viewport
+    if (optionBounding.top < 0) {
+      option.scrollIntoView(true);
+    }
+    // align to the bottom if the bottom of Option is out of the viewport
+    if (optionBounding.bottom > (window.innerHeight || document.documentElement.clientHeight)) {
+      option.scrollIntoView(false);
+    }
   }
 };
 

@@ -5,7 +5,7 @@ import { ThemeContext } from "@hig/theme-context";
 import { createCustomClassNames } from "@hig/utils";
 
 import Menu from "../Menu";
-// import stylesheet from "./stylesheet";
+import stylesheet from "./stylesheet";
 
 /**
  * @param {ReactNode} children
@@ -118,8 +118,8 @@ export default class MenuGroupPresenter extends Component {
 
   render() {
     const {
-      // children,
       menuGroupRef,
+      stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
 
@@ -128,15 +128,12 @@ export default class MenuGroupPresenter extends Component {
     return (
       <ThemeContext.Consumer>
         {({ resolvedRoles, metadata }) => {
-          // const styles = stylesheet(this.props, resolvedRoles);
+          const styles = stylesheet({ stylesheet: customStylesheet }, resolvedRoles);
 
           return (
             <div
-              // className={css(styles.menu)}
               {...otherProps}
-              // onBlur={this.handleBlur}
-              // onFocus={this.handleFocus}
-              // onKeyDown={this.handleKeyDown}
+              className={css(styles.menuGroup)}
               ref={menuGroupRef}
               role="listbox" // conditional or required
               tabIndex="0" // conditional w/ MenuGroup
