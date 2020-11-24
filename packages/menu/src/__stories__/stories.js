@@ -13,7 +13,6 @@ export default [
   {
     description: "default",
     getProps: () => ({
-      className: "test blah",
       multiple: false,
       checkmark: false,
       children: [
