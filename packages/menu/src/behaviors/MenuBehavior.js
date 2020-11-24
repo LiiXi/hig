@@ -2,8 +2,7 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import selectOption from "./selectOption";
 
-function checkScroll(optionId) {
-  const option = document.getElementById(optionId);
+function scrollInViewport(option) {
   const optionBounding = option.getBoundingClientRect();
 
   if (
@@ -25,6 +24,31 @@ function checkScroll(optionId) {
   }
 }
 
+function scrollInListbox(option, menu) {
+  if (option && menu.scrollHeight > menu.clientHeight) {
+    const scrollBottom = menu.clientHeight + menu.scrollTop;
+    const elementBottom = option.offsetTop + option.offsetHeight;
+    if (elementBottom > scrollBottom) {
+      // eslint-disable-next-line no-param-reassign
+      menu.scrollTop = elementBottom - menu.clientHeight;
+    }
+    if (option.offsetTop < menu.scrollTop) {
+      // eslint-disable-next-line no-param-reassign
+      menu.scrollTop = option.offsetTop;
+    }
+  }
+}
+
+function checkScroll(optionId, menu) {
+  const option = document.getElementById(optionId);
+
+  // scroll if out of viewport
+  scrollInViewport(option);
+
+  // scroll within the menu
+  scrollInListbox(option, menu);
+}
+
 export default class MenuBehavior extends Component {
   static propTypes = {
     children: PropTypes.func,
@@ -37,6 +61,7 @@ export default class MenuBehavior extends Component {
     handleFocus: PropTypes.func,
     handleKeyDown: PropTypes.func,
     handleMouseMove: PropTypes.func,
+    menuRef: PropTypes.func,
     multiple: PropTypes.bool,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
@@ -53,16 +78,30 @@ export default class MenuBehavior extends Component {
     defaultSelected: []
   };
 
-  /**
-   * @type {State}
-   */
-  state = {
-    activeOption: this.isControlled()
-      ? this.props.selected
-      : this.props.defaultSelected,
-    highlightIndex: 0,
-    optionInfo: null,
-    previousEvent: null
+  constructor(props) {
+    super(props);
+
+    /**
+     * @type {State}
+     */
+    this.state = {
+      activeOption: this.isControlled()
+        ? this.props.selected
+        : this.props.defaultSelected,
+      highlightIndex: 0,
+      optionInfo: null,
+      previousEvent: null
+    };
+
+    this.menuRef = null;
+  }
+
+  setMenuRef = element => {
+    if (this.props.menuRef) {
+      this.props.menuRef(element);
+    }
+
+    this.menuRef = element;
   };
 
   setOptionsInfo = optionInfo => {
@@ -134,15 +173,6 @@ export default class MenuBehavior extends Component {
       onKeyDown(event);
     }
 
-    // don't let this bubble up and trigger twice if this is within a MenuGroup component
-    event.stopPropagation();
-    // Set up options that can be highlighted
-    /* for (const index in options) {
-      if (!options[index].disabled && options[index].role !== `presentation`) {
-        highlightableIndexes.push(Number(index) + 1);
-      }
-    } */
-
     Object.keys(options).forEach(index => {
       if (!options[index].disabled && options[index].role !== `presentation`) {
         highlightableIndexes.push(Number(index) + 1);
@@ -159,27 +189,19 @@ export default class MenuBehavior extends Component {
 
         if (currentIndex === lastIndex) {
           setHighlightIndex(highlightableIndexes[0]);
-          // scrollintoview
-          /* 
-          document
-            .getElementById(getOptionsInfo()[highlightableIndexes[0] - 1].id)
-            .scrollIntoView(false); */
-
-          checkScroll(getOptionsInfo()[highlightableIndexes[0] - 1].id);
-        } else {
-          setHighlightIndex(highlightableIndexes[currentIndex + 1]);
-          // scrollintoviews
-          /* document
-            .getElementById(
-              getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id
-            )
-            .scrollIntoView(false); */
 
           checkScroll(
-            getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id
+            getOptionsInfo()[highlightableIndexes[0] - 1].id,
+            this.menuRef
+          );
+        } else {
+          setHighlightIndex(highlightableIndexes[currentIndex + 1]);
+
+          checkScroll(
+            getOptionsInfo()[highlightableIndexes[currentIndex + 1] - 1].id,
+            this.menuRef
           );
         }
-
         event.preventDefault();
         break;
       }
@@ -191,21 +213,17 @@ export default class MenuBehavior extends Component {
 
         if (currentIndex <= 0) {
           setHighlightIndex(highlightableIndexes[lastIndex]);
-          /* document
-            .getElementById(
-              getOptionsInfo()[highlightableIndexes[lastIndex] - 1].id
-            )
-            .scrollIntoView(false); */
-          checkScroll(getOptionsInfo()[highlightableIndexes[lastIndex] - 1].id);
+
+          checkScroll(
+            getOptionsInfo()[highlightableIndexes[lastIndex] - 1].id,
+            this.menuRef
+          );
         } else {
           setHighlightIndex(highlightableIndexes[currentIndex - 1]);
-          /* document
-            .getElementById(
-              getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id
-            )
-            .scrollIntoView(false); */
+
           checkScroll(
-            getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id
+            getOptionsInfo()[highlightableIndexes[currentIndex - 1] - 1].id,
+            this.menuRef
           );
         }
         event.preventDefault();
@@ -219,28 +237,13 @@ export default class MenuBehavior extends Component {
         const activeOptionsArray = [...this.state.activeOption];
         const { id } = this.state.optionInfo[getHighlightIndex() - 1];
         const activeOptions = selectOption(id, activeOptionsArray, multiple);
-        // console.log(activeOptions);
-        /* if (multiple) {
-          const activeOptions = this.state.activeOption;
-          const currentOption = this.state.optionInfo[getHighlightIndex() - 1]
-            .id;
-          if (activeOptions.indexOf(currentOption) === -1) {
-            activeOptions.push(currentOption);
-          } else {
-            activeOptions.splice(activeOptions.indexOf(currentOption), 1);
-          }
 
-          setActiveOption(activeOptions);
-        }
-        if (!multiple) {
-          setActiveOption(this.state.optionInfo[getHighlightIndex() - 1].id);
-        } */
         if (this.isControlled()) {
           return;
         }
 
         setActiveOption(activeOptions);
-        // console.log('called');
+
         event.preventDefault();
         break;
       }
@@ -297,6 +300,7 @@ export default class MenuBehavior extends Component {
     const setPreviousEvent = this.props.setPreviousEvent
       ? this.props.setPreviousEvent
       : this.setPreviousEvent;
+    const { setMenuRef } = this;
 
     return this.props.children({
       getActiveOption,
@@ -309,6 +313,7 @@ export default class MenuBehavior extends Component {
       handleMouseMove,
       setActiveOption,
       setHighlightIndex,
+      setMenuRef,
       setOptionsInfo,
       setPreviousEvent
     });

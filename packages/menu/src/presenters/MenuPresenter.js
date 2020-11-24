@@ -103,15 +103,11 @@ export default class MenuPresenter extends Component {
       role,
       tabIndex
     } = otherProps;
-    const highlightedId =
-      getHighlightIndex() !== 0
-        ? getOptionsInfo()[getHighlightIndex() - 1].id
-        : "";
     const ariaPayload =
       role !== `group`
         ? {
-            "aria-activedescendant": highlightedId,
-            "aria-multiselectable": multiple
+            ...(getHighlightIndex() !== 0 && { "aria-activedescendant": getOptionsInfo()[getHighlightIndex() - 1].id }),
+            ...(multiple && { "aria-multiselectable": multiple })
           }
         : {};
     const payload = { ...otherProps };

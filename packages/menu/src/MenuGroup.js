@@ -18,6 +18,11 @@ export default class MenuGroup extends Component {
      */
     defaultSelected: PropTypes.arrayOf(PropTypes.any),
     /**
+     * A callback ref that gets passed to the HTML
+     * element with `role="listbox"`
+     */
+    menuRef: PropTypes.func,
+    /**
      * Enables multiple selection
      * This will take precedent over the Menu prop
      * of the same name
@@ -51,7 +56,7 @@ export default class MenuGroup extends Component {
     const {
       children,
       defaultSelected,
-      menuGroupRef,
+      menuRef,
       multiple,
       onChange,
       selected,
@@ -63,6 +68,7 @@ export default class MenuGroup extends Component {
       <MenuBehavior
         {...otherProps}
         defaultSelected={defaultSelected}
+        menuRef={menuRef}
         multiple={multiple}
         onChange={onChange}
         selected={selected}
@@ -78,6 +84,7 @@ export default class MenuGroup extends Component {
           handleMouseMove,
           setActiveOption,
           setHighlightIndex,
+          setMenuRef,
           setOptionsInfo,
           setPreviousEvent
         }) => (
@@ -88,7 +95,7 @@ export default class MenuGroup extends Component {
             getHighlightIndex={getHighlightIndex}
             getOptionsInfo={getOptionsInfo}
             getPreviousEvent={getPreviousEvent}
-            menuGroupRef={menuGroupRef}
+            menuRef={setMenuRef}
             multiple={multiple}
             onBlur={handleBlur}
             onFocus={handleFocus}

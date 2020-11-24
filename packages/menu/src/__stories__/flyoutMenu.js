@@ -5,6 +5,16 @@ import Surface from "@hig/surface";
 
 import Menu, { Option } from "../index";
 
+function custom(styles) {
+  return {
+    ...styles,
+    menu: {
+      ...styles.menu,
+      height: `100px`
+    }
+  };
+}
+
 export default class FlyoutMenu extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +49,11 @@ export default class FlyoutMenu extends Component {
         // anchorPoint={anchorPoints.TOP_LEFT}
         content={() => (
           <Surface style={{ width: "200px" }} paddingSize={null}>
-            <Menu menuRef={this.setMenu} onChange={this.handleChange}>
+            <Menu
+              menuRef={this.setMenu}
+              onChange={this.handleChange}
+              stylesheet={custom}
+            >
               <Option id="option-1">Option 1</Option>
               <Option id="option-2">Option 2</Option>
               <Option id="option-3">Option 3</Option>

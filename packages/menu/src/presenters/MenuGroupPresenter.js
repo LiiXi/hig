@@ -119,21 +119,24 @@ export default class MenuGroupPresenter extends Component {
     const {
       getHighlightIndex,
       getOptionsInfo,
-      menuGroupRef,
+      menuRef,
       multiple,
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
-
     const { className } = otherProps;
-    const highlightedId =
-      getHighlightIndex() !== 0
-        ? getOptionsInfo()[getHighlightIndex() - 1].id
-        : "";
     const ariaPayload = {
-      "aria-activedescendant": highlightedId,
-      "aria-multiselectable": multiple
-    };
+      ...(getHighlightIndex() !== 0 && { "aria-activedescendant": getOptionsInfo()[getHighlightIndex() - 1].id }),
+      ...(multiple && { "aria-multiselectable": multiple })
+    }
+    const payload = { ...otherProps };
+    delete payload.defaultSelected;
+    delete payload.getActiveOption;
+    delete payload.getPreviousEvent;
+    delete payload.setActiveOption;
+    delete payload.setHighlightIndex;
+    delete payload.setOptionsInfo;
+    delete payload.setPreviousEvent;
 
     return (
       <ThemeContext.Consumer>
@@ -145,10 +148,10 @@ export default class MenuGroupPresenter extends Component {
 
           return (
             <div
-              {...otherProps}
+              {...payload}
               {...ariaPayload}
               className={cx([className, css(styles.menuGroup)])}
-              ref={menuGroupRef}
+              ref={menuRef}
               role="listbox" // conditional or required
               tabIndex="0" // conditional w/ MenuGroup
             >

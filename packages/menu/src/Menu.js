@@ -25,6 +25,11 @@ export default class Menu extends Component {
      */
     divider: PropTypes.bool,
     /**
+     * A callback ref that gets passed to the HTML
+     * element with `role="listbox"`
+     */
+    menuRef: PropTypes.func,
+    /**
      * Enables multiple selection
      */
     multiple: PropTypes.bool,
@@ -73,6 +78,7 @@ export default class Menu extends Component {
             {...otherProps}
             defaultSelected={defaultSelected}
             hasFocus={hasFocus}
+            menuRef={menuRef}
             multiple={multiple}
             onBlur={handleBlur}
             onChange={onChange}
@@ -91,6 +97,7 @@ export default class Menu extends Component {
               handleMouseMove,
               setActiveOption,
               setHighlightIndex,
+              setMenuRef,
               setOptionsInfo,
               setPreviousEvent
             }) => (
@@ -102,7 +109,7 @@ export default class Menu extends Component {
                 getHighlightIndex={getHighlightIndex}
                 getOptionsInfo={getOptionsInfo}
                 getPreviousEvent={getPreviousEvent}
-                menuRef={menuRef}
+                menuRef={setMenuRef}
                 multiple={multiple}
                 onBlur={handleMenuBehaviorBlur}
                 onFocus={handleMenuBehaviorFocus}
