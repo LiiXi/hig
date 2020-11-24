@@ -25,7 +25,7 @@ stories.forEach(({ description, getProps }) => {
 });
 
 storybook.add(
-  "test",
+  "flyout menu",
   withInfo({
     ...infoOptions,
     propTablesExclude: [KnobbedThemeProvider, FlyoutMenu]

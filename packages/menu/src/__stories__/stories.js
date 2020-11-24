@@ -36,7 +36,7 @@ export default [
     })
   },
   {
-    description: "grouped menus",
+    description: "kitchen sink",
     getProps: () => ({
       checkmark: false,
       multiple: false,

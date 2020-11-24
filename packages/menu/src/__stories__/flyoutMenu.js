@@ -46,7 +46,6 @@ export default class FlyoutMenu extends Component {
     return (
       <Flyout
         open={this.state.open}
-        // anchorPoint={anchorPoints.TOP_LEFT}
         content={() => (
           <Surface style={{ width: "200px" }} paddingSize={null}>
             <Menu
