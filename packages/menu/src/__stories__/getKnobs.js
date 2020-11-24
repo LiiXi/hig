@@ -12,14 +12,21 @@ const knobLabels = {
 
 export default function getKnobs(props, component) {
   const { checkmark, multiple, ...otherProps } = props;
-  const conditionalKnobs = component === Menu
-    ? { checkmark: boolean(knobLabels.checkmark, checkmark, knobGroupIds.basic) }
-    : {}
+  const conditionalKnobs =
+    component === Menu
+      ? {
+          checkmark: boolean(
+            knobLabels.checkmark,
+            checkmark,
+            knobGroupIds.basic
+          )
+        }
+      : {};
 
   return {
     ...otherProps,
     ...conditionalKnobs,
     multiple: boolean(knobLabels.multiple, multiple, knobGroupIds.basic),
-    onChange: action(knobLabels.onChange),
+    onChange: action(knobLabels.onChange)
   };
 }

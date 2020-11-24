@@ -91,20 +91,29 @@ export default class MenuPresenter extends Component {
       children,
       divider,
       menuRef,
+      multiple,
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
     const {
       id,
       className,
-      // onBlur,
-      // onFocus,
-      // onKeyDown,
-      // onMouseMove,
+      getHighlightIndex,
+      getOptionsInfo,
       role,
       tabIndex
     } = otherProps;
-
+    const highlightedId =
+      getHighlightIndex() !== 0
+        ? getOptionsInfo()[getHighlightIndex() - 1].id
+        : "";
+    const ariaPayload =
+      role !== `group`
+        ? {
+            "aria-activedescendant": highlightedId,
+            "aria-multiselectable": multiple
+          }
+        : {};
     const payload = { ...otherProps };
     delete payload.getActiveOption;
     delete payload.getHighlightIndex;
@@ -132,14 +141,11 @@ export default class MenuPresenter extends Component {
           );
           return (
             <ul
+              {...ariaPayload}
               {...payload}
               className={cx([className, css(styles.menu)])}
               id={id}
               ref={menuRef}
-              // onBlur={onBlur}
-              // onFocus={onFocus}
-              // onKeyDown={onKeyDown}
-              // onMouseMove={onMouseMove}
               role={role || "listbox"} // conditional or required
               tabIndex={tabIndex || "0"} // conditional w/ MenuGroup
             >

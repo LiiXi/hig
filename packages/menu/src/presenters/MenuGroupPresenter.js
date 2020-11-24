@@ -117,12 +117,23 @@ export default class MenuGroupPresenter extends Component {
 
   render() {
     const {
+      getHighlightIndex,
+      getOptionsInfo,
       menuGroupRef,
+      multiple,
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
 
     const { className } = otherProps;
+    const highlightedId =
+      getHighlightIndex() !== 0
+        ? getOptionsInfo()[getHighlightIndex() - 1].id
+        : "";
+    const ariaPayload = {
+      "aria-activedescendant": highlightedId,
+      "aria-multiselectable": multiple
+    };
 
     return (
       <ThemeContext.Consumer>
@@ -135,6 +146,7 @@ export default class MenuGroupPresenter extends Component {
           return (
             <div
               {...otherProps}
+              {...ariaPayload}
               className={cx([className, css(styles.menuGroup)])}
               ref={menuGroupRef}
               role="listbox" // conditional or required

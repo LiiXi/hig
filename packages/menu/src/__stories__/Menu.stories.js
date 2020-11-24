@@ -6,6 +6,7 @@ import Surface from "@hig/surface";
 import infoOptions from "./infoOptions";
 import renderStory from "./renderStory";
 import stories from "./stories";
+import FlyoutMenu from "./flyoutMenu";
 
 const storybook = storiesOf("Menu", module);
 
@@ -22,3 +23,15 @@ stories.forEach(({ description, getProps }) => {
     })
   );
 });
+
+storybook.add(
+  "test",
+  withInfo({
+    ...infoOptions,
+    propTablesExclude: [KnobbedThemeProvider, FlyoutMenu]
+  })(() => (
+    <KnobbedThemeProvider>
+      <FlyoutMenu />
+    </KnobbedThemeProvider>
+  ))
+);

@@ -15,6 +15,7 @@ export default class OptionPresenter extends Component {
     children: PropTypes.node,
     disabled: PropTypes.bool,
     highlighted: PropTypes.bool,
+    id: PropTypes.string,
     isPressed: PropTypes.bool,
     role: PropTypes.oneOf(AVAILABLE_ROLES),
     selected: PropTypes.bool,
@@ -29,6 +30,7 @@ export default class OptionPresenter extends Component {
       children,
       disabled,
       highlighted,
+      id,
       isPressed,
       role,
       selected,
@@ -36,26 +38,26 @@ export default class OptionPresenter extends Component {
       stylesheet: customStylesheet,
       ...otherProps
     } = this.props;
-    const { className, id } = otherProps;
+    const { className } = otherProps;
     const menuOptionClassName = createCustomClassNames(
       className,
-      "menu-option"
+      `menu-option`
     );
     const checkmarkWrapperClassName = createCustomClassNames(
       className,
-      "checkmark-wrapper"
+      `checkmark-wrapper`
     );
     const assetWrapperClassName = createCustomClassNames(
       className,
-      "asset-wrapper"
+      `asset-wrapper`
     );
     const optionContentWrapperClassName = createCustomClassNames(
       className,
-      "option-content-wrapper"
+      `option-content-wrapper`
     );
     const shortcutWrapperClassName = createCustomClassNames(
       className,
-      "shortcut-wrapper"
+      `shortcut-wrapper`
     );
     const payload = { ...otherProps };
     delete payload.getActiveOption;
@@ -89,8 +91,8 @@ export default class OptionPresenter extends Component {
           return (
             <li
               // conditional payload for aria-selected
-              {...payload}
               {...ariaPayload}
+              {...payload}
               className={cx([menuOptionClassName, css(styles.menuOption)])}
               disabled={disabled}
               id={id}

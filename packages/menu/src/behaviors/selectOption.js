@@ -9,7 +9,7 @@ export default function selectOption(optionId, activeOptionsArray, multiple) {
   const selectedOptions = multiple ? activeOptionsArray : [];
 
   if (selectedOptions.indexOf(optionId) === -1) {
-    selectedOptions.push(optionId);
+    selectedOptions.unshift(optionId);
   } else {
     selectedOptions.splice(selectedOptions.indexOf(optionId), 1);
   }

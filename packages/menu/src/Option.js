@@ -24,6 +24,10 @@ export default class Option extends Component {
      */
     disabled: PropTypes.bool,
     /**
+     * HTML unique id for the element
+     */
+    id: PropTypes.string.isRequired,
+    /**
      * HTML attribute for accessibility
      */
     role: PropTypes.oneOf(AVAILABLE_ROLES),
@@ -47,21 +51,20 @@ export default class Option extends Component {
       asset,
       children,
       disabled,
+      id,
       role,
       shortcut,
       stylesheet,
       ...otherProps
     } = this.props;
     const {
-      checkmark,
-      id, // is this required?
+      // checkmark,
       getHighlightIndex,
-      multiple,
+      // multiple,
       onFocus,
       onMouseDown,
       onMouseLeave,
       onMouseUp
-      // role
     } = otherProps;
 
     return (
@@ -79,7 +82,8 @@ export default class Option extends Component {
           <OptionBehavior
             {...otherProps}
             disabled={disabled}
-            multiple={multiple}
+            id={id}
+            // multiple={multiple}
             onMouseLeave={handlePressedMouseLeave}
             role={role}
           >
@@ -94,7 +98,7 @@ export default class Option extends Component {
               <OptionPresenter
                 {...otherProps}
                 asset={asset}
-                checkmark={checkmark}
+                // checkmark={checkmark}
                 disabled={disabled}
                 highlighted={getHighlightIndex() === getIndexFromId(id) + 1}
                 id={id}

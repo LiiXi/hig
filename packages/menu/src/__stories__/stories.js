@@ -1,68 +1,134 @@
 import React from "react";
-import Menu, { Option } from "../index";
-import { AddMember24, AddFolder24, CartFull24, Cloud24, Checklist24 } from "@hig/icons";
+import {
+  AddMember24,
+  AddFolder24,
+  CartFull24,
+  Cloud24,
+  Checklist24
+} from "@hig/icons";
 import Avatar from "@hig/avatar";
+import Menu, { Option } from "../index";
 
 export default [
   {
     description: "default",
     getProps: () => ({
       className: "test blah",
-      multiple: true,
-      checkmark: true,
+      multiple: false,
+      checkmark: false,
       children: [
-        <Option
-          id="test-1"
-          role="presentation"
-        >
-          test 1
+        <Option id="option-1" key="option-1">
+          Option 1
         </Option>,
-        <Option id="blah-2" className="option tester" onClick={event => console.log(event.target)}>test 2</Option>,
-        <Option id="uhm-3">test 3</Option>,
-        <Option id="blahasdf" disabled>test 4</Option>,
-        <Option id="another one">test 5</Option>,
-        <Option id="another asdfs" disabled>test 6</Option>
+        <Option id="option-2" key="option-2">
+          Option 2
+        </Option>,
+        <Option id="option-3" key="option-3" disabled>
+          Option 3
+        </Option>,
+        <Option id="option-4" key="option-4">
+          Option 4
+        </Option>,
+        <Option id="option-5" key="option-5">
+          Option 5
+        </Option>
       ]
     })
   },
   {
     description: "grouped menus",
     getProps: () => ({
-      // checkmark: true, icon={<Avatar name="Maria McCaplin" size="medium" />}
-      multiple: true,
-      className: "menuGroup another",
+      checkmark: false,
+      multiple: false,
       children: [
-        <Menu id="1" divider className="test">
-          <Option id="test-1" role="presentation">Group 1</Option>
-          <Option id="blah-2">test 2</Option>
-          <Option id="uhm-3">test 3</Option>
-          <Option id="blahasdf" disabled>test 4</Option>
-          <Option id="anotherone">test 5</Option>
-          <Option id="another" disabled>test 6</Option>
+        <Menu id="shortcut-group" divider key="icon-group">
+          <Option id="shortcut-header" role="presentation">
+            Icon Option Header
+          </Option>
+          <Option
+            id="add-folder"
+            asset={<AddFolder24 />}
+            shortcut={<span>&#8984; 5</span>}
+          >
+            Add Folder
+          </Option>
+          <Option
+            id="add-member"
+            asset={<AddMember24 />}
+            shortcut={<span>&#8984; 6</span>}
+          >
+            Add Member
+          </Option>
+          <Option
+            id="cart-full"
+            asset={<CartFull24 />}
+            shortcut={<span>&#8984; 7</span>}
+          >
+            Cart Full
+          </Option>
+          <Option
+            id="cloud"
+            asset={<Cloud24 />}
+            shortcut={<span>&#8984; 8</span>}
+          >
+            Cloud
+          </Option>
+          <Option
+            id="checklist"
+            asset={<Checklist24 />}
+            shortcut={<span>&#8984; 9</span>}
+          >
+            Checklist
+          </Option>
         </Menu>,
-        <Menu id="3" divider selected={["blah-2dddd"]}>
-          <Option id="test-1dddd" role="presentation">Group 2</Option>
-          <Option id="blah-2dddd" asset={<AddFolder24 />} shortcut={<span>&#8984; 5</span>}>test 7</Option>
-          <Option id="uhm-3ddddd" asset={<AddMember24 />} shortcut={<span>&#8984; 6</span>}>test 8</Option>
-          <Option id="blahasdddddddf" disabled asset={<CartFull24 />} shortcut={<span>&#8984; 7</span>}>test 9</Option>
-          <Option id="anothedddddddddrone" asset={<Cloud24 />} shortcut={<span>&#8984; 8</span>}>test 10</Option>
-          <Option id="anothdddddddder" disabled asset={<Checklist24 />} shortcut={<span>&#8984; 9</span>}>test 11</Option>
+        <Menu checkmark id="checkmark-group" divider key="checkmark-group">
+          <Option id="checkmark-header" role="presentation">
+            Checkmark Option Header
+          </Option>
+          <Option id="checkmark-1">Checkmark 1</Option>
+          <Option id="checkmark-2">Checkmark 2</Option>
+          <Option id="checkmark-3" disabled>
+            Checkmark 3
+          </Option>
+          <Option id="checkmark-4">Checkmark 4</Option>
+          <Option id="checkmark-5" disabled>
+            Checkmark 5
+          </Option>
         </Menu>,
-        <Menu checkmark id="2" divider>
-          <Option id="test-asdf1" role="presentation">Group 3</Option>
-          <Option id="blah-2asdf">test 12</Option>
-          <Option id="uhm-3asdf">test 13</Option>
-          <Option id="blahasasdfasdfasddf" disabled>test 14</Option>
-          <Option id="anotherasdf">test 15</Option>
-          <Option id="andf" disabled>test 16</Option>
-        </Menu>,
-        <Menu checkmark id="4">
-          <Option id="tesasdfasdt-asdf1" role="presentation">Group 4</Option>
-          <Option id="blaasdfasdfadsh-2asdf" asset={<Avatar name="Peter Parker" size="medium" />}>test 17</Option>
-          <Option id="uhasdfasdfasm-3asdf" asset={<Avatar name="Bruce Wayne" size="medium" />}>test 18</Option>
-          <Option id="bl11111ahasasdfasdfasddf" disabled asset={<Avatar name="Jessica Drew" size="medium" />}>test 19</Option>
-          <Option id="anasdfasdfotherasdf" asset={<Avatar name="Cassandra Cain" size="medium" />}>test 20</Option>
-          <Option id="44444sadfasdfas" disabled asset={<Avatar name="Stephanie Brown" size="medium" />}>test 21</Option>
+        <Menu checkmark id="avatar-group" key="avatar-group">
+          <Option id="avatar-header" role="presentation">
+            Avatar Option Header
+          </Option>
+          <Option
+            id="peter-parker"
+            asset={<Avatar name="Peter Parker" size="medium" />}
+          >
+            Peter Parker
+          </Option>
+          <Option
+            id="bruce-wayne"
+            asset={<Avatar name="Bruce Wayne" size="medium" />}
+          >
+            Bruce Wayne
+          </Option>
+          <Option
+            id="jessica-drew"
+            asset={<Avatar name="Jessica Drew" size="medium" />}
+          >
+            Jessica Drew
+          </Option>
+          <Option
+            id="cassandra-cain"
+            asset={<Avatar name="Cassandra Cain" size="medium" />}
+          >
+            Cassandra Cain
+          </Option>
+          <Option
+            id="stephanie-brown"
+            asset={<Avatar name="Stephanie Brown" size="medium" />}
+          >
+            Stephanie Brown
+          </Option>
         </Menu>
       ]
     })
